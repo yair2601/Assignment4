@@ -5,45 +5,59 @@ public class Student implements Runnable{
 	private String studentName;
 	private int studentClass;
 	private double studentLevel;
-	private int studentPace;
+	private double studentPace;
 	private Test test;
+	private CourseInformation course;
+	private double[] WorkGrades;
 	
-	public Student(int studentId,String studentName,int studentClass, double studentLevel, int studentPace ) {
+	public Student(int studentId,String studentName,int studentClass, double studentLevel, double studentPace, double[] grades, CourseInformation course ) {
 		this.studentClass = studentClass;
 		this.studentId=studentId;
 		this.studentLevel=studentLevel;
 		this.studentPace=studentPace;
 		this.studentName=studentName;
+		this.course=course;
+		this.WorkGrades=grades;
 	}
 
 	@Override
 	public void run() {
-		 this.test = new Test(studentId);
+		this.test = new Test(studentId);
 		test.setStudentId(this.studentId);
 		test.setDate();
 		SolveTest();
+		course.getStudentQueue().insert(this);
+		System.out.println("i am in "+this.studentName);
+		
+		
 	   
 	}
 
 	private void SolveTest() {//solve the test
 		for(int i=0;i<test.getStudentAnswer().length;i++) {
 			answerQuestion(i);
+			 try {
+		    		
+					Thread.sleep((long) (this.studentPace*1000));
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 		}
-			
-		
-	    try {
-	    		
-				Thread.sleep(this.studentPace);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		
 	}
 
 	private void answerQuestion(int i) {//generate answer for the test
 		double randomNumber= Math.random();
-		if(randomNumber<=this.studentLevel) {
-			test.getStudentAnswer()[i]=correctAnswer[i];//need to put here the correct answer
+		boolean correctAnswer =TeachingAssistant.getCorrectAnswer()[i];
+		if(randomNumber<=this.studentLevel) {//the probability to answer correct
+			test.getStudentAnswer()[i]=correctAnswer;
+		}
+		else {//Incorrect answer
+			if(correctAnswer==true) {
+				test.getStudentAnswer()[i]=false;
+			}
+			else {
+				test.getStudentAnswer()[i]=true;
+			}
 		}
 	}
 }
