@@ -43,20 +43,25 @@ public class TeachingAssistant implements Runnable{
 		if(this.teachingAssistantName.equals("Maya")){
 			try {
 				Test extractTest=BufferAAssistant.extract();
-				checkTest(extractTest);
+				checkTest(extractTest,0,BufferAAssistant,BufferBAssistant);//indicator 0 for maya
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		
+
 		}
 		else {//lior
-			
+			try {
+				Test extractTest=BufferBAssistant.extract();
+				checkTest(extractTest,1,BufferAAssistant,BufferBAssistant);//indicator 1 for Lior
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
 
 
-	private void checkTest(Test extractTest) {
+	private void checkTest(Test extractTest, int indicator, Queue<Test> bufferAAssistant, Queue<Test> bufferBAssistant) {
 		double workTime=TeachingAssistantRandomWorkTime();
 		updateAssitantSalary(workTime);
 		if(extractTest.getStatus()==1){//test not checked yet
@@ -64,7 +69,7 @@ public class TeachingAssistant implements Runnable{
 				checkQuestion (i,extractTest);
 			}
 			updateTestStatus(extractTest);
-			moveTestToSecondAssitent(extractTest);
+			moveTestToSecondAssitent(extractTest,indicator,bufferAAssistant,bufferBAssistant);
 		}
 
 		if(extractTest.getStatus()==2){//test already checked one time
@@ -76,14 +81,19 @@ public class TeachingAssistant implements Runnable{
 		}
 	}
 	private void moveTestToLecturer(Test extractTest) {
-		// TODO Auto-generated method stub
+		Queue<Test> BufferToLecturer = CourseInformation.Fatma.getTestQueues().elementAt(2);
+		BufferToLecturer.insert(extractTest);
 
 	}
 
 
-	private void moveTestToSecondAssitent(Test extractTest) {
-		
-
+	private void moveTestToSecondAssitent(Test extractTest, int indicator, Queue<Test> bufferAAssistant, Queue<Test> bufferBAssistant) {
+		if(indicator==0) {
+			bufferBAssistant.insert(extractTest);
+		}
+		if(indicator==1) {
+			bufferAAssistant.insert(extractTest);
+		}
 	}
 
 
