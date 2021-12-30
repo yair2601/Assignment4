@@ -12,14 +12,36 @@ public class CourseInformation {
 	private Vector<ExamsDepartmentWorker> examsDepartmentWorker;
 	//private Vector<Queue<?>> queus;
 	private Queue<Student> studentQueue;
+	private Vector <Queue<Test>> testQueues;
+	private InformationSystem informationSystem;
+	public static CourseInformation Fatma;
 
 	public CourseInformation() throws IOException {
+		this.Fatma=this;
 		TeachingAssistant Lior = new TeachingAssistant();
 		TeachingAssistant Maya = new TeachingAssistant();
+		this.teachingAssistants= new Vector<TeachingAssistant>();
+		this.teachingAssistants.add(Maya);
+		this.teachingAssistants.add(Lior);
 		//		this.queus = new Vector<Queue<?>>();
 		this.students = new Vector<Student>();
 		this.studentQueue= new Queue<Student>();
 		getStudentFromFile("C:\\Users\\yair2\\Java\\Student.txt");
+		Proctor Jorjet= new Proctor("Jorjet", 70, this);
+		Proctor Brijet= new Proctor("Brijet", 75, this);
+		Proctor Jaklin= new Proctor("Jaklin", 80, this);
+		proctors=new Vector<Proctor>();
+		proctors.add(Jorjet);
+		proctors.add(Brijet);
+		proctors.add(Jaklin);
+		this.testQueues= new Vector <Queue<Test>>();
+		this.testQueues.add(new Queue<Test>());//teaching assist 1
+		this.testQueues.add(new Queue<Test>());//teaching assist 2
+		
+		informationSystem= new InformationSystem();
+		
+		
+		
 	}
 	private void getStudentFromFile(String import_questions) throws IOException {
 		String Configuration = import_questions;
@@ -113,5 +135,14 @@ public class CourseInformation {
 	//	}
 	public Queue<Student> getStudentQueue() {
 		return studentQueue;
+	}
+	public Vector <Student> getStudents() {
+		return this.students;
+	}
+	public Vector<Queue<Test>> getTestQueues() {
+		return this.testQueues;
+	}
+	public InformationSystem getInformationSystem() {
+		return informationSystem;
 	}
 }

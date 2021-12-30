@@ -20,17 +20,15 @@ public class Student implements Runnable{
 		this.WorkGrades=grades;
 	}
 
-	@Override
 	public void run() {
 		this.test = new Test(studentId);
 		test.setStudentId(this.studentId);
 		test.setDate();
 		SolveTest();
 		course.getStudentQueue().insert(this);
-		System.out.println("i am in "+this.studentName);
-		
-		
-	   
+		System.out.println("im in"+this.studentName);
+		//CourseInformation.Fatma.getInformationSystem().FindMyExam(this); // until someone scan the exam
+		//this.test.setStatus(1);
 	}
 
 	private void SolveTest() {//solve the test
@@ -59,5 +57,12 @@ public class Student implements Runnable{
 				test.getStudentAnswer()[i]=true;
 			}
 		}
+	}
+	public Test getTest() {
+		return this.test;
+	}
+
+	public int getStudentClass() {
+		return studentClass;
 	}
 }

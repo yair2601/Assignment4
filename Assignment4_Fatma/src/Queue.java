@@ -11,7 +11,6 @@ public class Queue<T> {
 	public synchronized void insert(T item) {
 		buffer.add(item);
 		this.notifyAll();
-		System.out.println("i am in ");
 	}
 
 	public synchronized T extract() throws InterruptedException {
@@ -21,5 +20,15 @@ public class Queue<T> {
 		T t = buffer.elementAt(0);
 		buffer.remove(t);
 		return t;
+	}
+	public synchronized boolean isEmpty() {
+		if(this.buffer.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Vector<T> getBuffer() {
+		return this.buffer;
 	}
 }
