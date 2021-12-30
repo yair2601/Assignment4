@@ -18,16 +18,9 @@ public class Proctor implements Runnable {
 
 	public void run() {
 		while(!checkIfAllStudentHandled()) {
-			System.out.println("n= "+numberOfStudents);
-
 			DoProctorWork();
-
-
-			updateRemainStudent();
-
+			updateRemainStudent();	
 		}
-
-		//this.run();//after finish with one student return to the next run
 	}
 
 
@@ -46,28 +39,25 @@ public class Proctor implements Runnable {
 	}
 
 
-	private synchronized void DoProctorWork() {
+	private synchronized static void DoProctorWork() {
 		Student extractStudent;
-
-		try {
-			extractStudent = CourseInformation.Fatma.getStudentQueue().extract();
-			Test currentTest = extractStudent.getTest();
-			ProctorRandomWorkTime();
-			currentTest.setStatus(1);
-			currentTest.setClassNumber(extractStudent.getStudentClass());
-			addToTeachingAssitantsQueue(currentTest);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			try {
+				extractStudent = CourseInformation.Fatma.getStudentQueue().extract();
+				Test currentTest = extractStudent.getTest();
+				ProctorRandomWorkTime();
+				currentTest.setStatus(1);
+				currentTest.setClassNumber(extractStudent.getStudentClass());
+				addToTeachingAssitantsQueue(currentTest);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 
 
 
 
-	}
 
-
-	private void addToTeachingAssitantsQueue(Test currentTest) {
+	private static void addToTeachingAssitantsQueue(Test currentTest) {
 		Queue<Test> teachingAssit1Queue = CourseInformation.Fatma.getTestQueues().elementAt(0);
 		Queue<Test> teachingAssit2Queue = CourseInformation.Fatma.getTestQueues().elementAt(1);
 		if(teachingAssit1Queue.getBuffer().size()>teachingAssit2Queue.getBuffer().size()) {
@@ -81,7 +71,7 @@ public class Proctor implements Runnable {
 	}
 
 
-	private void ProctorRandomWorkTime() {		
+	private static void ProctorRandomWorkTime() {		
 		double random = ((Math.random() * (3 - 1)) + 1);//generate random number in the range;
 		try {
 			Thread.sleep((long) (random*1000));

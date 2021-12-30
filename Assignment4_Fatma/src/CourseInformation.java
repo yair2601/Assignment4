@@ -18,15 +18,15 @@ public class CourseInformation {
 
 	public CourseInformation() throws IOException {
 		this.Fatma=this;
-		TeachingAssistant Lior = new TeachingAssistant();
-		TeachingAssistant Maya = new TeachingAssistant();
+		TeachingAssistant Lior = new TeachingAssistant("Lior", 3);
+		TeachingAssistant Maya = new TeachingAssistant("Maya", 0);
 		this.teachingAssistants= new Vector<TeachingAssistant>();
 		this.teachingAssistants.add(Maya);
 		this.teachingAssistants.add(Lior);
 		//		this.queus = new Vector<Queue<?>>();
 		this.students = new Vector<Student>();
 		this.studentQueue= new Queue<Student>();
-		getStudentFromFile("C:\\Users\\yair2\\Java\\Student.txt");
+		getStudentFromFile("C:\\Users\\nirta\\Java\\Student.txt");
 		Proctor Jorjet= new Proctor("Jorjet", 70, this);
 		Proctor Brijet= new Proctor("Brijet", 75, this);
 		Proctor Jaklin= new Proctor("Jaklin", 80, this);
@@ -35,8 +35,9 @@ public class CourseInformation {
 		proctors.add(Brijet);
 		proctors.add(Jaklin);
 		this.testQueues= new Vector <Queue<Test>>();
-		this.testQueues.add(new Queue<Test>());//teaching assist 1
-		this.testQueues.add(new Queue<Test>());//teaching assist 2
+		this.testQueues.add(new Queue<Test>());//teaching assist 1 line
+		this.testQueues.add(new Queue<Test>());//teaching assist 2 line
+		this.testQueues.add(new Queue<Test>());//Lecturer line
 		
 		informationSystem= new InformationSystem();
 		

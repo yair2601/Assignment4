@@ -62,4 +62,15 @@ public class Test {
 				
 	}
 
+	public double getStudentGradeBeforeFactor() {
+		return studentGradeBeforeFactor;
+	}
+
+	public void UpdateStudentGradeBeforeFactor(double points) {
+		this.studentGradeBeforeFactor += points;
+	}
+	public void UpdateStatus(int updateStatus) {
+		this.Status += updateStatus;
+	}
+
 }
