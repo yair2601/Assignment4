@@ -12,7 +12,7 @@ public class Lecturer implements Runnable {
 		t.start();   
 	}
 
-	@Override
+
 	public void run() {
 		checkTest();
 		System.out.println("Test is over! Grades are published, and here are the results:");

@@ -87,4 +87,12 @@ public class Test {
 		
 	}
 
+	public double getStudentFinalGrade() {
+		return studentFinalGrade;
+	}
+
+	public void setStudentFinalGrade(double studentFinalGrade) {
+		this.studentFinalGrade = studentFinalGrade;
+	}
+
 }
