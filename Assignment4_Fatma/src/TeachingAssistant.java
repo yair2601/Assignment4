@@ -5,11 +5,13 @@ public class TeachingAssistant implements Runnable{
 	private int pricePerSecond;
 	private double salary;
 	private double PError;
+	private boolean flag;//change while we are getting a fake exam
 
 	public TeachingAssistant(String teachingAssistantName,int PricePerSecond) {
 		this.teachingAssistantName=teachingAssistantName;
 		this.pricePerSecond=PricePerSecond;
 		this.PError=0.5;//need to update later with the Gui
+		this.flag=true;
 		Thread t = new Thread(this); 
 		t.start();  
 
@@ -42,17 +44,30 @@ public class TeachingAssistant implements Runnable{
 
 		if(this.teachingAssistantName.equals("Maya")){
 			try {
-				Test extractTest=BufferAAssistant.extract();
-				checkTest(extractTest,0,BufferAAssistant,BufferBAssistant);//indicator 0 for maya
-			} catch (InterruptedException e) {
+				while(flag==true) {
+					Test extractTest=BufferAAssistant.extract();
+					if(extractTest.getStudentId()!=-1)//we got the fake exam
+						checkTest(extractTest,0,BufferAAssistant,BufferBAssistant);//indicator 0 for maya
+					else 
+						flag=false;
+
+				}//while
+			} 
+			catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
 		}
 		else {//lior
 			try {
-				Test extractTest=BufferBAssistant.extract();
-				checkTest(extractTest,1,BufferAAssistant,BufferBAssistant);//indicator 1 for Lior
+				while(flag==true) {
+					Test extractTest=BufferBAssistant.extract();
+					if(extractTest.getStudentId()!=-1)//we got the fake exam
+						checkTest(extractTest,1,BufferAAssistant,BufferBAssistant);//indicator 1 for Lior
+					else 
+						flag=false;
+				}
+
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
