@@ -65,4 +65,11 @@ public class Student implements Runnable{
 	public int getStudentClass() {
 		return studentClass;
 	}
+	public int getStudentId() {
+		return studentId;
+	}
+
+	public double[] getWorkGrades() {
+		return WorkGrades;
+	}
 }

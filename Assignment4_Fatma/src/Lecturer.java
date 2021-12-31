@@ -5,7 +5,7 @@ public class Lecturer implements Runnable {
 	private Vector<Integer> excellentStudent;
 	private boolean flag;
 
-	public Lecturer() {
+	public Lecturer(String lecturerName) {
 		this.lecturerName= lecturerName;
 		this.flag=true;
 		Thread t = new Thread(this); 

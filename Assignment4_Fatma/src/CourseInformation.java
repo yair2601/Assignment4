@@ -34,8 +34,8 @@ public class CourseInformation {
 		proctors.add(Jorjet);
 		proctors.add(Brijet);
 		proctors.add(Jaklin);
-		this.lecturer = new Lecturer();
-		this.exerciseCheckers= new ExerciseChecker("Marmor");
+		this.lecturer = new Lecturer("Roy");
+		this.exerciseCheckers= new ExerciseChecker("Marmor",students);//changed
 		this.testQueues= new Vector <Queue<Test>>();
 		this.testQueues.add(new Queue<Test>());//teaching assist 1 line place 0
 		this.testQueues.add(new Queue<Test>());//teaching assist 2 line place 1
