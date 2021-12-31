@@ -1,4 +1,4 @@
-import java.util.Vector;
+import java.util.*;
 
 public class ExerciseChecker {
 	private String exerciseCheckertName;
@@ -11,7 +11,7 @@ public class ExerciseChecker {
 	public ExerciseChecker(String exerciseCheckertName,Vector<Student> students) {//constructor
 		this.exerciseCheckertName=exerciseCheckertName;
 		this.pricePerSecond=1;
-		this.workGrades= new double[5][students.size()];
+		this.workGrades= new double[students.size()][5];
 		FillworkGrades(students);
 		System.out.println("vv");
 
@@ -23,7 +23,7 @@ public class ExerciseChecker {
 	private void FillworkGrades(Vector<Student> students) {
 		for(int i=0;i<students.size();i++) {
 			//for(int j=0;j<workGrades.length;j++) {
-				workGrades[0][i]=(double)students.elementAt(i).getStudentId();
+				workGrades[i][0]=(students.elementAt(i).getStudentId());
 		}
 		CopyStudentWorksGrades( students);
 	}
