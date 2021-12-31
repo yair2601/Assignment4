@@ -93,9 +93,9 @@ public class Lecturer implements Runnable {
 		if(currentGrade>56) {//else
 			extractTest.setStudentGradeAfterFactor(currentGrade+5);
 		}
-//		else {//need to ask yair 
-//			extractTest.setStudentGradeAfterFactor(extractTest.getStudentGradeBeforeFactor());
-//		}
+		else {//need to ask yair 
+			extractTest.setStudentGradeAfterFactor(extractTest.getStudentGradeBeforeFactor());
+		}
 
 	}
 }

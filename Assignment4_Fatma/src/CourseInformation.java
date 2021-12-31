@@ -12,6 +12,7 @@ public class CourseInformation {
 	private Vector<ExamsDepartmentWorker> examsDepartmentWorker;
 	//private Vector<Queue<?>> queus;
 	private Queue<Student> studentQueue;
+	private Queue<Test> testBoundedQueue;
 	private Vector <Queue<Test>> testQueues;
 	private InformationSystem informationSystem;
 	public static CourseInformation Fatma;
@@ -25,6 +26,7 @@ public class CourseInformation {
 		this.testQueues.add(new Queue<Test>());//ExerciseChecker line place 3
 		this.testQueues.add(new Queue<Test>());//IEMSecretary line place 4
 		this.testQueues.add(new Queue<Test>());//EDW line place 5
+		this.testBoundedQueue=new BoundedQueue<Test>(10);
 		TeachingAssistant Lior = new TeachingAssistant("Lior", 3);
 		TeachingAssistant Maya = new TeachingAssistant("Maya", 0);
 		this.teachingAssistants= new Vector<TeachingAssistant>();
@@ -154,5 +156,8 @@ public class CourseInformation {
 	}
 	public InformationSystem getInformationSystem() {
 		return informationSystem;
+	}
+	public Queue<Test> getTestBoundedQueue() {
+		return testBoundedQueue;
 	}
 }
