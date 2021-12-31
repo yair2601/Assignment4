@@ -73,4 +73,18 @@ public class Test {
 		this.Status += updateStatus;
 	}
 
+	public double getStudentGradeAfterFactor() {
+		return studentGradeAfterFactor;
+	}
+
+	public void setStudentGradeAfterFactor(double studentGradeAfterFactor) {
+		if(this.studentGradeAfterFactor>this.studentGradeBeforeFactor) {
+			this.studentGradeAfterFactor = studentGradeAfterFactor;
+		}
+		if(this.studentGradeAfterFactor>100) {
+			this.studentGradeAfterFactor=100;
+		}
+		
+	}
+
 }
