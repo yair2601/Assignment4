@@ -46,6 +46,7 @@ public class TeachingAssistant implements Runnable{
 			try {
 				while(flag==true) {
 					Test extractTest=BufferAAssistant.extract();
+					System.out.println("im in assitstant 1");
 					if(extractTest.getStudentId()!=-1)//we got the fake exam
 						checkTest(extractTest,0,BufferAAssistant,BufferBAssistant);//indicator 0 for maya
 					else 
@@ -62,6 +63,7 @@ public class TeachingAssistant implements Runnable{
 			try {
 				while(flag==true) {
 					Test extractTest=BufferBAssistant.extract();
+					System.out.println("im in assitstant 2");
 					if(extractTest.getStudentId()!=-1)//we got the fake exam
 						checkTest(extractTest,1,BufferAAssistant,BufferBAssistant);//indicator 1 for Lior
 					else 
@@ -87,7 +89,7 @@ public class TeachingAssistant implements Runnable{
 			moveTestToSecondAssitent(extractTest,indicator,bufferAAssistant,bufferBAssistant);
 		}
 
-		if(extractTest.getStatus()==2){//test already checked one time
+		if(extractTest.getStatus()==2){//test already checked one time++ need to check what we do with the grade which one we are taking currently we just updating twice
 			for (int i=0;i<extractTest.getStudentAnswer().length;i++) {
 				checkQuestion (i,extractTest);
 			}

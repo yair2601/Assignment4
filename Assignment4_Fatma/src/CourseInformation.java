@@ -18,6 +18,13 @@ public class CourseInformation {
 
 	public CourseInformation() throws IOException {
 		this.Fatma=this;
+		this.testQueues= new Vector <Queue<Test>>();
+		this.testQueues.add(new Queue<Test>());//teaching assist 1 line place 0
+		this.testQueues.add(new Queue<Test>());//teaching assist 2 line place 1
+		this.testQueues.add(new Queue<Test>());//Lecturer line place 2
+		this.testQueues.add(new Queue<Test>());//ExerciseChecker line place 3
+		this.testQueues.add(new Queue<Test>());//IEMSecretary line place 4
+		this.testQueues.add(new Queue<Test>());//EDW line place 5
 		TeachingAssistant Lior = new TeachingAssistant("Lior", 3);
 		TeachingAssistant Maya = new TeachingAssistant("Maya", 0);
 		this.teachingAssistants= new Vector<TeachingAssistant>();
@@ -36,13 +43,10 @@ public class CourseInformation {
 		proctors.add(Jaklin);
 		this.lecturer = new Lecturer("Roy");
 		this.exerciseCheckers= new ExerciseChecker("Marmor",students);//changed
-		this.testQueues= new Vector <Queue<Test>>();
-		this.testQueues.add(new Queue<Test>());//teaching assist 1 line place 0
-		this.testQueues.add(new Queue<Test>());//teaching assist 2 line place 1
-		this.testQueues.add(new Queue<Test>());//Lecturer line place 2
-		this.testQueues.add(new Queue<Test>());//ExerciseChecker line place 3
-		this.testQueues.add(new Queue<Test>());//IEMSecretary line place 4
-		
+		IEMSecretary Hana= new IEMSecretary("Hana",0);
+		IEMSecretary Yona= new IEMSecretary("Yona",1);
+		IEMSecretary.add(Hana);
+		IEMSecretary.add(Yona);
 		
 		informationSystem= new InformationSystem();
 		

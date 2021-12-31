@@ -25,6 +25,7 @@ public class Lecturer implements Runnable {
 			while(flag==true) {
 				LecturerTimeOfWork();
 				Test extractTest=CourseInformation.Fatma.getTestQueues().elementAt(2).extract();
+				System.out.println("im in lecturer");
 				if(extractTest.getStudentId()!=-1){//we got the fake exam
 					giveFactor(extractTest);
 					getExecllentStudent(extractTest);
@@ -89,9 +90,12 @@ public class Lecturer implements Runnable {
 		if(currentGrade>=50&&currentGrade<=55) {
 			extractTest.setStudentGradeAfterFactor(56);
 		}
-		if(currentGrade>56) {
+		if(currentGrade>56) {//else
 			extractTest.setStudentGradeAfterFactor(currentGrade+5);
 		}
+//		else {//need to ask yair 
+//			extractTest.setStudentGradeAfterFactor(extractTest.getStudentGradeBeforeFactor());
+//		}
 
 	}
 }

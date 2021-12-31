@@ -21,8 +21,6 @@ public class ExerciseChecker implements Runnable {
 
 	}
 
-
-
 	private void calculateAssignmentsGrade(long[][] workGrades, Test extractTest) {
 		for(int i=0;i<workGrades.length;i++) {
 			if(workGrades[i][0]==extractTest.getStudentId()) {
@@ -32,8 +30,6 @@ public class ExerciseChecker implements Runnable {
 		}
 	}
 
-
-
 	private void FillworkGrades(Vector<Student> students) {
 		for(int i=0;i<students.size();i++) {
 			workGrades[i][0]=(students.elementAt(i).getStudentId());
@@ -41,8 +37,6 @@ public class ExerciseChecker implements Runnable {
 		CopyStudentWorksGrades( students);
 
 	}
-
-
 
 	private void CopyStudentWorksGrades(Vector<Student> students) {
 		for(int i=0;i<students.size();i++) {
@@ -54,28 +48,27 @@ public class ExerciseChecker implements Runnable {
 
 	}
 
-
-
-
 	public void run() {
-		checkTest();
+		calculateFinalGrade();
 	}
 
 
 
-	private void checkTest() {
+	private void calculateFinalGrade() {
 		try {
 			while(flag==true) {
 				Double randomTime=ExerciseCheckerTimeOfWork();
 				updateExerciseCheckerSalary(randomTime);
 				Test extractTest=CourseInformation.Fatma.getTestQueues().elementAt(3).extract();
+				System.out.println("im in excerisze");
 				if(extractTest.getStudentId()!=-1){//we got the fake exam
 					calculateGradeAfterFactor(extractTest);
 					changeStatus(extractTest);
 					passTestToNextQueue(extractTest);
-				}else 
+				}else {
 					flag=false;
-
+					passTestToNextQueue(extractTest);//pass the fake exam
+				}
 			}//while
 		} 
 		catch (InterruptedException e) {
@@ -127,16 +120,9 @@ public class ExerciseChecker implements Runnable {
 		try {
 			Thread.sleep((long) (random*1000));
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return random;
 	}
-
-	//	private void ExerciseCheckerTimeOfWork() {
-	//		// TODO Auto-generated method stub
-	//		
-	//	}
-
 
 }
