@@ -1,8 +1,7 @@
 
 public class Lecturer {
-private void syso() {
-	int a=0;
+	int a=2;
 	// TODO Auto-generated method stub
 
-}
+
 }
