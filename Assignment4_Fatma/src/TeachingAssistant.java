@@ -2,13 +2,13 @@
 public class TeachingAssistant implements Runnable{
 	private static  boolean [] correctAnswer=randomAnswer();
 	private String teachingAssistantName;
-	private int PricePerSecond;
+	private int pricePerSecond;
 	private double salary;
 	private double PError;
 
 	public TeachingAssistant(String teachingAssistantName,int PricePerSecond) {
 		this.teachingAssistantName=teachingAssistantName;
-		this.PricePerSecond=PricePerSecond;
+		this.pricePerSecond=PricePerSecond;
 		this.PError=0.5;//need to update later with the Gui
 		Thread t = new Thread(this); 
 		t.start();  
@@ -127,7 +127,7 @@ public class TeachingAssistant implements Runnable{
 
 
 	private void updateAssitantSalary(double workTime) {
-		this.salary+=(workTime*this.PricePerSecond);
+		this.salary+=(workTime*this.pricePerSecond);
 
 	}
 

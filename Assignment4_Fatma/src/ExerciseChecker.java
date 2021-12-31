@@ -1,5 +1,6 @@
 
 public class ExerciseChecker {
-	private int age;
-
+	private String exerciseCheckertName;
+	private int pricePerSecond;
+	private double salary;
 }
