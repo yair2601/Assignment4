@@ -7,7 +7,7 @@ public class CourseInformation {
 	private Vector<TeachingAssistant> teachingAssistants;
 	private Vector<Proctor> proctors;
 	private Lecturer lecturer;
-	private Vector<ExerciseChecker> exerciseCheckers;
+	private ExerciseChecker exerciseCheckers;
 	private Vector<IEMSecretary> IEMSecretary;
 	private Vector<ExamsDepartmentWorker> examsDepartmentWorker;
 	//private Vector<Queue<?>> queus;
@@ -34,10 +34,15 @@ public class CourseInformation {
 		proctors.add(Jorjet);
 		proctors.add(Brijet);
 		proctors.add(Jaklin);
+		this.lecturer = new Lecturer();
+		this.exerciseCheckers= new ExerciseChecker();
 		this.testQueues= new Vector <Queue<Test>>();
-		this.testQueues.add(new Queue<Test>());//teaching assist 1 line
-		this.testQueues.add(new Queue<Test>());//teaching assist 2 line
-		this.testQueues.add(new Queue<Test>());//Lecturer line
+		this.testQueues.add(new Queue<Test>());//teaching assist 1 line place 0
+		this.testQueues.add(new Queue<Test>());//teaching assist 2 line place 1
+		this.testQueues.add(new Queue<Test>());//Lecturer line place 2
+		this.testQueues.add(new Queue<Test>());//ExerciseChecker line place 3
+		this.testQueues.add(new Queue<Test>());//IEMSecretary line place 4
+		
 		
 		informationSystem= new InformationSystem();
 		
