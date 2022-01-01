@@ -47,6 +47,7 @@ public class CourseInformation {
 		this.exerciseCheckers= new ExerciseChecker("Marmor",students);//changed
 		IEMSecretary Hana= new IEMSecretary("Hana",0);
 		IEMSecretary Yona= new IEMSecretary("Yona",1);
+		Vector<IEMSecretary> IEMSecretary= new Vector<IEMSecretary>() ;
 		IEMSecretary.add(Hana);
 		IEMSecretary.add(Yona);
 		
