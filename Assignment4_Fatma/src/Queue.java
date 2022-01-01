@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Queue<T> {
 
-	private Vector<T> buffer; 
+	protected Vector<T> buffer; 
 
 	public Queue() {
 		buffer = new Vector<T>();

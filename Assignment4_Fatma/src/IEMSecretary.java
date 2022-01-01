@@ -3,36 +3,32 @@ public class IEMSecretary implements Runnable {
 
 	private String secretaryName;
 	private static boolean flag;
+	
 	private int secretaryType;//0-student academic status not valid 1-for valid student academic status
 
 
 	public  IEMSecretary(String secretaryName,int secretaryType) {
 		this.secretaryName=secretaryName;
-		this.flag=true;
+		flag=true;
+		//this.flag2=true;
 		this.secretaryType=secretaryType;
 		Thread t = new Thread(this); 
 		t.start();
 		
 	}
 
-
-
-
-
-
-
 	public void run() {
-		insertStudentDataToDB(this.secretaryType);
+		while(flag=true) {
+			flag = insertStudentDataToDB(this.secretaryType);
+			if(flag==false) {
+				break;
+			}
+		}
+		System.out.println(" iem dead");
 
 	}
 
-
-
-
-
-
-
-	private static synchronized void insertStudentDataToDB(int secretaryType) {
+	private static synchronized boolean insertStudentDataToDB(int secretaryType) {
 		try {
 			while(flag==true) {
 				Test extractTest=CourseInformation.Fatma.getTestQueues().elementAt(4).extract();
@@ -44,6 +40,8 @@ public class IEMSecretary implements Runnable {
 						}
 						else {
 							returnTestToCurrentQueue(extractTest);
+							break;//exit from this function and return the key
+							
 						}
 					}
 					if(secretaryType==1) {
@@ -52,11 +50,14 @@ public class IEMSecretary implements Runnable {
 						}
 						else {
 							returnTestToCurrentQueue(extractTest);
+							break;
 						}
 					}
 				}else {
-					flag=false;
-					passTestToNextQueue(extractTest);//pass the fake exam
+					changeFlag();
+					return flag;
+					//flag=false;
+					//passTestToNextQueue(extractTest);//pass the fake exam
 				}
 				//Double randomTime=SecretaryTimeOfWork();
 			}//while
@@ -64,9 +65,15 @@ public class IEMSecretary implements Runnable {
 		catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		return flag;
+		
 
 	}
+	private static void changeFlag() {
+		IEMSecretary.flag=false;
+		
+	}
+
 	private static synchronized void workOnTest(Test extractTest, int secretaryType) {
 		if(secretaryType==0) {
 			UpdateDB(secretaryType);	
@@ -106,6 +113,7 @@ public class IEMSecretary implements Runnable {
 
 	private static synchronized void passTestToNextQueue(Test extractTest) {
 		CourseInformation.Fatma.getTestQueues().elementAt(5).insert(extractTest);
+		System.out.println("insert to bounded");
 
 	}
 

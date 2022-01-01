@@ -27,8 +27,8 @@ public class Student implements Runnable{
 		SolveTest();
 		course.getStudentQueue().insert(this);
 		System.out.println("im in"+this.studentName);
-		//CourseInformation.Fatma.getInformationSystem().FindMyExam(this); // until someone scan the exam
-		//this.test.setStatus(1);
+		CourseInformation.Fatma.getInformationSystem().FindMyExam(this); // until someone scan the exam
+		this.test.setStatus(1);
 	}
 
 	private void SolveTest() {//solve the test

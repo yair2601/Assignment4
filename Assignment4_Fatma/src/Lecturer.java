@@ -6,6 +6,7 @@ public class Lecturer implements Runnable {
 	private boolean flag;
 
 	public Lecturer(String lecturerName) {
+		this.excellentStudent=new Vector<Integer>();
 		this.lecturerName= lecturerName;
 		this.flag=true;
 		Thread t = new Thread(this); 
@@ -57,6 +58,7 @@ public class Lecturer implements Runnable {
 	}
 
 	private void announceEndOfTest(Test extractTest) {
+		System.out.println("end of exam");
 		flag=false;
 		passAnnnouceToTeachingAssitance(extractTest);
 		passTestToNextQueue(extractTest);		
@@ -90,10 +92,10 @@ public class Lecturer implements Runnable {
 		if(currentGrade>=50&&currentGrade<=55) {
 			extractTest.setStudentGradeAfterFactor(56);
 		}
-		if(currentGrade>56) {//else
+		else if(currentGrade>56) {
 			extractTest.setStudentGradeAfterFactor(currentGrade+5);
 		}
-		else {//need to ask yair 
+		else {
 			extractTest.setStudentGradeAfterFactor(extractTest.getStudentGradeBeforeFactor());
 		}
 

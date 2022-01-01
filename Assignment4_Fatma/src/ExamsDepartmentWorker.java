@@ -47,7 +47,9 @@ public class ExamsDepartmentWorker implements Runnable {
 	private synchronized static void DoEDWWork() {
 		Test extractTest;
 			try {
-				extractTest = CourseInformation.Fatma.getTestBoundedQueue().extract();
+				System.out.println("sup");
+				extractTest = CourseInformation.Fatma.getTestQueues().elementAt(5).extract();
+				System.out.println("im in exam");
 				Test currentTest = extractTest;
 				EDWRandomWorkTime();
 				currentTest.setStatus(1);

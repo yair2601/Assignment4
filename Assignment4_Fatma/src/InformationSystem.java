@@ -22,6 +22,7 @@ public class InformationSystem {
 	private synchronized boolean checkIfExamExist(Student student) {
 		for(int i=0;i<this.Tests.size();i++) {
 			if(student.getTest().getStudentId()==Tests.elementAt(i).getStudentId()) {
+				System.out.println("this id my exam"+student.getStudentId());
 				return true;
 			}
 		}

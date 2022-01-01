@@ -9,7 +9,7 @@ public class CourseInformation {
 	private Lecturer lecturer;
 	private ExerciseChecker exerciseCheckers;
 	private Vector<IEMSecretary> IEMSecretary;
-	private Vector<ExamsDepartmentWorker> examsDepartmentWorker;
+	private Vector<ExamsDepartmentWorker> examsDepartmentWorkers;
 	//private Vector<Queue<?>> queus;
 	private Queue<Student> studentQueue;
 	private Queue<Test> testBoundedQueue;
@@ -25,8 +25,8 @@ public class CourseInformation {
 		this.testQueues.add(new Queue<Test>());//Lecturer line place 2
 		this.testQueues.add(new Queue<Test>());//ExerciseChecker line place 3
 		this.testQueues.add(new Queue<Test>());//IEMSecretary line place 4
-		this.testQueues.add(new Queue<Test>());//EDW line place 5
-		this.testBoundedQueue=new BoundedQueue<Test>(10);
+		//this.testQueues.add(new Queue<Test>());
+		this.testQueues.add(new BoundedQueue<Test>(10));//EDW line place 5
 		TeachingAssistant Lior = new TeachingAssistant("Lior", 3);
 		TeachingAssistant Maya = new TeachingAssistant("Maya", 0);
 		this.teachingAssistants= new Vector<TeachingAssistant>();
@@ -35,7 +35,7 @@ public class CourseInformation {
 		//		this.queus = new Vector<Queue<?>>();
 		this.students = new Vector<Student>();
 		this.studentQueue= new Queue<Student>();
-		getStudentFromFile("C:\\Users\\nirta\\Java\\Student.txt");
+		getStudentFromFile("C:\\Users\\yair2\\Java\\Student.txt");
 		Proctor Jorjet= new Proctor("Jorjet", 70, this);
 		Proctor Brijet= new Proctor("Brijet", 75, this);
 		Proctor Jaklin= new Proctor("Jaklin", 80, this);
@@ -50,6 +50,9 @@ public class CourseInformation {
 		Vector<IEMSecretary> IEMSecretary= new Vector<IEMSecretary>() ;
 		IEMSecretary.add(Hana);
 		IEMSecretary.add(Yona);
+		examsDepartmentWorkers=new Vector<ExamsDepartmentWorker>();
+		ExamsDepartmentWorker shmulik = new ExamsDepartmentWorker("shmulik", this);
+		examsDepartmentWorkers.add(shmulik);
 		
 		informationSystem= new InformationSystem();
 		
