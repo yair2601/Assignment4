@@ -82,14 +82,14 @@ public class TeachingAssistant implements Runnable{
 		double workTime=TeachingAssistantRandomWorkTime();
 		updateAssitantSalary(workTime);
 		if(extractTest.getStatus()==1){//test not checked yet
-			for (int i=0;i<extractTest.getStudentAnswer().length;i++) {
-				checkQuestion (i,extractTest);
-			}
+//			for (int i=0;i<extractTest.getStudentAnswer().length;i++) {
+//				//checkQuestion (i,extractTest); need to check if needed i think the grade is just for the second check
+//			}
 			updateTestStatus(extractTest);
 			moveTestToSecondAssitent(extractTest,indicator,bufferAAssistant,bufferBAssistant);
 		}
 
-		if(extractTest.getStatus()==2){//test already checked one time++ need to check what we do with the grade which one we are taking currently we just updating twice
+		else if(extractTest.getStatus()==2){//test already checked one time++ need to check what we do with the grade which one we are taking currently we just updating twice
 			for (int i=0;i<extractTest.getStudentAnswer().length;i++) {
 				checkQuestion (i,extractTest);
 			}
@@ -120,9 +120,9 @@ public class TeachingAssistant implements Runnable{
 		}
 		else {
 			double randomNumber=generateRandomNumber();
-			if(randomNumber>this.PError&&extractTest.getStatus()==1)
+			if(randomNumber<this.PError&&extractTest.getStatus()==1)
 				extractTest.UpdateStudentGradeBeforeFactor(5);
-			else if(randomNumber>(this.PError/2)&&extractTest.getStatus()==2){
+			else if(randomNumber<(this.PError/2)&&extractTest.getStatus()==2){
 				extractTest.UpdateStudentGradeBeforeFactor(5);
 			}
 
