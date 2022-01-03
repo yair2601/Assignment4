@@ -11,6 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JProgressBar;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
 
 public class GUI extends JFrame {
 
@@ -52,9 +55,8 @@ public class GUI extends JFrame {
 		spinner.setBounds(203, 57, 74, 20);
 		contentPane.add(spinner);
 		
-		JButton ButtonStart = new JButton("Start");
-		ButtonStart.setBounds(52, 242, 85, 21);
-		contentPane.add(ButtonStart);
+
+
 		
 		JLabel lblNewLabel_1 = new JLabel("Number of EDW");
 		lblNewLabel_1.setBounds(52, 109, 103, 27);
@@ -68,6 +70,9 @@ public class GUI extends JFrame {
 		
 		JProgressBar progressBar = new JProgressBar();
 		progressBar.setBounds(52, 160, 225, 11);
+//		progressBar.setMinimum(0);
+//		progressBar.setMaximum(CourseInformation.Fatma.getStudents().size());
+		
 		contentPane.add(progressBar);
 		
 		JLabel lblNewLabel_2 = new JLabel("test in progress please wait");
@@ -79,7 +84,26 @@ public class GUI extends JFrame {
 		contentPane.add(lblNewLabel_3);
 		
 		JButton ButtonExist = new JButton("Exit");
+		ButtonExist.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(EXIT_ON_CLOSE);
+			}
+		});
 		ButtonExist.setBounds(203, 242, 85, 21);
 		contentPane.add(ButtonExist);
+		
+		JButton ButtonStart = new JButton("Start");
+		ButtonStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem())  );
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		ButtonStart.setBounds(52, 243, 85, 20);
+		contentPane.add(ButtonStart);
 	}
 }

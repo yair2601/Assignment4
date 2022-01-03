@@ -16,9 +16,12 @@ public class CourseInformation {
 	private Vector <Queue<Test>> testQueues;
 	private InformationSystem informationSystem;
 	public static CourseInformation Fatma;
+	private double Perror;
+	private int NumberOfEDW;
 
-	public CourseInformation() throws IOException {
+	public CourseInformation(double Perror,int NumberOfEDW) throws IOException {
 		this.Fatma=this;
+		this.NumberOfEDW=NumberOfEDW;
 		this.testQueues= new Vector <Queue<Test>>();
 		this.testQueues.add(new Queue<Test>());//teaching assist 1 line place 0
 		this.testQueues.add(new Queue<Test>());//teaching assist 2 line place 1
@@ -27,15 +30,15 @@ public class CourseInformation {
 		this.testQueues.add(new Queue<Test>());//IEMSecretary line place 4
 		//this.testQueues.add(new Queue<Test>());
 		this.testQueues.add(new BoundedQueue<Test>(10));//EDW line place 5
-		TeachingAssistant Lior = new TeachingAssistant("Lior", 3);
-		TeachingAssistant Maya = new TeachingAssistant("Maya", 0);
+		TeachingAssistant Lior = new TeachingAssistant("Lior", 3,Perror);
+		TeachingAssistant Maya = new TeachingAssistant("Maya", 3,Perror);
 		this.teachingAssistants= new Vector<TeachingAssistant>();
 		this.teachingAssistants.add(Maya);
 		this.teachingAssistants.add(Lior);
 		//		this.queus = new Vector<Queue<?>>();
 		this.students = new Vector<Student>();
 		this.studentQueue= new Queue<Student>();
-		getStudentFromFile("C:\\Users\\nirta\\Java\\Student.txt");
+		getStudentFromFile("C:\\Users\\yair2\\Java\\Student.txt");
 		Proctor Jorjet= new Proctor("Jorjet", 70, this);
 		Proctor Brijet= new Proctor("Brijet", 75, this);
 		Proctor Jaklin= new Proctor("Jaklin", 80, this);
@@ -51,14 +54,22 @@ public class CourseInformation {
 		IEMSecretary.add(Hana);
 		IEMSecretary.add(Yona);
 		examsDepartmentWorkers=new Vector<ExamsDepartmentWorker>();
-		ExamsDepartmentWorker shmulik = new ExamsDepartmentWorker("shmulik", this);
-		examsDepartmentWorkers.add(shmulik);
+		createEdW();
+
 		
 		informationSystem= new InformationSystem();
-		
+		StartTest(this.Fatma.students);
 		
 		
 	}
+
+	private void createEdW() {
+		for(int i=0;i<this.NumberOfEDW;i++) {
+			ExamsDepartmentWorker shmulik = new ExamsDepartmentWorker("shmulik", this);
+			examsDepartmentWorkers.add(shmulik);
+		}
+	}
+
 	private void getStudentFromFile(String import_questions) throws IOException {
 		String Configuration = import_questions;
 		BufferedReader inFile=null;
@@ -130,8 +141,8 @@ public class CourseInformation {
 	}
 
 	public static void main(String[] args) throws IOException{
-		CourseInformation fatma = new CourseInformation();
-		StartTest(fatma.students);
+//		CourseInformation fatma = new CourseInformation();
+	//	StartTest(fatma.students);
 		System.out.println("dffd");
 
 	}

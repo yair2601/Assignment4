@@ -7,10 +7,10 @@ public class TeachingAssistant implements Runnable{
 	private double PError;
 	private boolean flag;//change while we are getting a fake exam
 
-	public TeachingAssistant(String teachingAssistantName,int PricePerSecond) {
+	public TeachingAssistant(String teachingAssistantName,int PricePerSecond,double Perror) {
 		this.teachingAssistantName=teachingAssistantName;
 		this.pricePerSecond=PricePerSecond;
-		this.PError=0.5;//need to update later with the Gui
+		this.PError=Perror;//need to update later with the Gui
 		this.flag=true;
 		Thread t = new Thread(this); 
 		t.start();  
