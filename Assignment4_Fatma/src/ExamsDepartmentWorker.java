@@ -47,13 +47,14 @@ public class ExamsDepartmentWorker implements Runnable {
 	private synchronized static void DoEDWWork() {
 		Test extractTest;
 			try {
-				System.out.println("sup");
+				//System.out.println("sup");
 				extractTest = CourseInformation.Fatma.getTestQueues().elementAt(5).extract();
-				System.out.println("im in exam");
+				//System.out.println("im in exam");
 				Test currentTest = extractTest;
 				EDWRandomWorkTime();
 				currentTest.setStatus(1);
 				CourseInformation.Fatma.getInformationSystem().insertTest(currentTest);
+				printStatement(currentTest);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -61,6 +62,12 @@ public class ExamsDepartmentWorker implements Runnable {
 
 
 
+
+
+	private static void printStatement(Test currentTest) {
+		System.out.println("Exam Scanned for" +currentTest.getStudentId());
+		
+	}
 
 
 	private static void addToTeachingAssitantsQueue(Test currentTest) {
