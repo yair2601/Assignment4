@@ -42,7 +42,7 @@ public class CourseInformation {
 		//		this.queus = new Vector<Queue<?>>();
 		this.students = new Vector<Student>();
 		this.studentQueue= new Queue<Student>();
-		getStudentFromFile("C:\\Users\\nirta\\Java\\Student.txt");
+		getStudentFromFile("C:\\Users\\yair2\\Java\\Student.txt");
 		Proctor Jorjet= new Proctor("Jorjet", 70, this);
 		Proctor Brijet= new Proctor("Brijet", 75, this);
 		Proctor Jaklin= new Proctor("Jaklin", 80, this);
@@ -145,7 +145,7 @@ public class CourseInformation {
 	}
 
 	public static void main(String[] args) throws IOException{
-//		CourseInformation fatma = new CourseInformation();
+		CourseInformation fatma = new CourseInformation(0.2, 2);
 	//	StartTest(fatma.students);
 		System.out.println("dffd");
 

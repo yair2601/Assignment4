@@ -51,6 +51,7 @@ public class ExerciseChecker implements Runnable {
 	public void run() {
 		calculateFinalGrade();
 		updateTotalSalary();
+		System.out.println("Echecker dead");
 	}
 
 

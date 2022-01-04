@@ -69,9 +69,7 @@ public class Test {
 	public void UpdateStudentGradeBeforeFactor(double points) {
 		this.studentGradeBeforeFactor += points;
 	}
-	public void UpdateStatus(int updateStatus) {
-		this.Status += updateStatus;
-	}
+
 
 	public double getStudentGradeAfterFactor() {
 		return studentGradeAfterFactor;

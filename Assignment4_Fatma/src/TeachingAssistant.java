@@ -65,6 +65,7 @@ public class TeachingAssistant implements Runnable{
 			}
 		}
 		updateTotalSalary();
+		System.out.println("teachingAssist dead");
 	}
 
 	private void updateTotalSalary() {
@@ -125,7 +126,7 @@ public class TeachingAssistant implements Runnable{
 
 
 	private void updateTestStatus(Test extractTest) {
-		extractTest.UpdateStatus(1);
+		extractTest.setStatus(1);
 
 	}
 

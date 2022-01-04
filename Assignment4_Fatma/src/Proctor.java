@@ -17,10 +17,17 @@ public class Proctor implements Runnable {
 
 
 	public void run() {
+		takeTestFromStudents();
+		System.out.println("proctor dead");
+	}
+
+
+	private static synchronized void takeTestFromStudents() {
 		while(!checkIfAllStudentHandled()) {
 			DoProctorWork();
 			updateRemainStudent();	
 		}
+		
 	}
 
 

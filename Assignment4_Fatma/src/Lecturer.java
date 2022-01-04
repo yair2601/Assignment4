@@ -17,7 +17,7 @@ public class Lecturer implements Runnable {
 	public void run() {
 		checkTest();
 		PrintResults();
-		
+		System.out.println("lecturer dead");
 		
 
 	}
