@@ -10,7 +10,6 @@ public class CourseInformation {
 	private ExerciseChecker exerciseCheckers;
 	private Vector<IEMSecretary> IEMSecretary;
 	private Vector<ExamsDepartmentWorker> examsDepartmentWorkers;
-	//private Vector<Queue<?>> queus;
 	private Queue<Student> studentQueue;
 	private Queue<Test> testBoundedQueue;
 	private Vector <Queue<Test>> testQueues;
@@ -27,6 +26,72 @@ public class CourseInformation {
 		this.Fatma=this;
 		this.NumberOfEDW=NumberOfEDW;
 		this.testQueues= new Vector <Queue<Test>>();
+		informationSystem= new InformationSystem();
+		addToTestQueues();
+		createTeachingAssistant();
+		createStudentsVector();
+		getStudentFromFile("C:\\Users\\nirta\\Java\\Student2.txt");
+		createProctors();
+		createLecturer();
+		createSecretaries();
+		createEdW();
+		//informationSystem= new InformationSystem();
+		StartTest(this.Fatma.students);
+		
+		
+	}
+
+	private void createSecretaries() {
+		IEMSecretary Hana= new IEMSecretary("Hana",0);
+		IEMSecretary Yona= new IEMSecretary("Yona",1);
+		insertToSecretaryVector(Hana,Yona);
+	}
+
+	private void insertToSecretaryVector(IEMSecretary Hana, IEMSecretary Yona) {
+		Vector<IEMSecretary> IEMSecretary= new Vector<IEMSecretary>() ;
+		IEMSecretary.add(Hana);
+		IEMSecretary.add(Yona);
+		
+	}
+
+	private void createLecturer() {
+		this.lecturer = new Lecturer("Roy");
+		this.exerciseCheckers= new ExerciseChecker("Marmor",students);//changed
+		
+	}
+
+	private void createProctors() {
+		Proctor Jorjet= new Proctor("Jorjet", 70, this.getStudents().size());
+		Proctor Brijet= new Proctor("Brijet", 75, this.getStudents().size());
+		Proctor Jaklin= new Proctor("Jaklin", 80, this.getStudents().size());
+		insertToProctorVector(Jorjet,Brijet,Jaklin);
+		
+	}
+
+	private void insertToProctorVector(Proctor Jorjet, Proctor Brijet, Proctor Jaklin) {
+		proctors=new Vector<Proctor>();
+		proctors.add(Jorjet);
+		proctors.add(Brijet);
+		proctors.add(Jaklin);
+		
+	}
+
+	private void createStudentsVector() {
+		this.students = new Vector<Student>();
+		this.studentQueue= new Queue<Student>();
+		
+	}
+
+	private void createTeachingAssistant() {
+		TeachingAssistant Lior = new TeachingAssistant("Lior", 3,Perror);
+		TeachingAssistant Maya = new TeachingAssistant("Maya", 3,Perror);
+		this.teachingAssistants= new Vector<TeachingAssistant>();
+		this.teachingAssistants.add(Maya);
+		this.teachingAssistants.add(Lior);
+		
+	}
+
+	private void addToTestQueues() {
 		this.testQueues.add(new Queue<Test>());//teaching assist 1 line place 0
 		this.testQueues.add(new Queue<Test>());//teaching assist 2 line place 1
 		this.testQueues.add(new Queue<Test>());//Lecturer line place 2
@@ -34,40 +99,11 @@ public class CourseInformation {
 		this.testQueues.add(new Queue<Test>());//IEMSecretary line place 4
 		//this.testQueues.add(new Queue<Test>());
 		this.testQueues.add(new BoundedQueue<Test>(10));//EDW line place 5
-		TeachingAssistant Lior = new TeachingAssistant("Lior", 3,Perror);
-		TeachingAssistant Maya = new TeachingAssistant("Maya", 3,Perror);
-		this.teachingAssistants= new Vector<TeachingAssistant>();
-		this.teachingAssistants.add(Maya);
-		this.teachingAssistants.add(Lior);
-		//		this.queus = new Vector<Queue<?>>();
-		this.students = new Vector<Student>();
-		this.studentQueue= new Queue<Student>();
-		getStudentFromFile("C:\\Users\\yair2\\Java\\Student.txt");
-		Proctor Jorjet= new Proctor("Jorjet", 70, this);
-		Proctor Brijet= new Proctor("Brijet", 75, this);
-		Proctor Jaklin= new Proctor("Jaklin", 80, this);
-		proctors=new Vector<Proctor>();
-		proctors.add(Jorjet);
-		proctors.add(Brijet);
-		proctors.add(Jaklin);
-		this.lecturer = new Lecturer("Roy");
-		this.exerciseCheckers= new ExerciseChecker("Marmor",students);//changed
-		IEMSecretary Hana= new IEMSecretary("Hana",0);
-		IEMSecretary Yona= new IEMSecretary("Yona",1);
-		Vector<IEMSecretary> IEMSecretary= new Vector<IEMSecretary>() ;
-		IEMSecretary.add(Hana);
-		IEMSecretary.add(Yona);
-		examsDepartmentWorkers=new Vector<ExamsDepartmentWorker>();
-		createEdW();
-
-		
-		informationSystem= new InformationSystem();
-		StartTest(this.Fatma.students);
-		
 		
 	}
 
 	private void createEdW() {
+		examsDepartmentWorkers=new Vector<ExamsDepartmentWorker>();
 		for(int i=0;i<this.NumberOfEDW;i++) {
 			ExamsDepartmentWorker shmulik = new ExamsDepartmentWorker("shmulik", this);
 			examsDepartmentWorkers.add(shmulik);

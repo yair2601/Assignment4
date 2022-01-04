@@ -115,6 +115,7 @@ public class ExerciseChecker implements Runnable {
 	}
 
 	private void changeStatus(Test extractTest) {
+		System.out.println("Excersize status");
 		extractTest.setStatus(1);
 
 	}

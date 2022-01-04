@@ -112,6 +112,7 @@ public class IEMSecretary implements Runnable {
 	}
 
 	private static synchronized void changeStatus(Test extractTest) {
+		System.out.println("IEM status");
 		extractTest.setStatus(1);
 
 	}

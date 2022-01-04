@@ -126,6 +126,7 @@ public class TeachingAssistant implements Runnable{
 
 
 	private void updateTestStatus(Test extractTest) {
+		System.out.println("teaching assis status");
 		extractTest.setStatus(1);
 
 	}

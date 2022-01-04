@@ -8,7 +8,7 @@ public class Test {
 	private double studentGradeBeforeFactor;
 	private double studentGradeAfterFactor;
 	private double studentFinalGrade;
-	private int Status;//0-default 1-Signature by proctor 2-check once 3-check Twice 4-confirmed+factor 5- after works 6-in DB 7- read by student
+	private int Status;//0-default 1-Signature by proctor 2-check once 3-check Twice 4-confirmed+factor 5- after works 6-in DB 7-scanned 8 read by student
 	private int classNumber;
 	
 	public Test(int studentId) {

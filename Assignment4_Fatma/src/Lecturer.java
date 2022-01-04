@@ -108,6 +108,7 @@ public class Lecturer implements Runnable {
 	}
 
 	private void changeStatus(Test extractTest) {
+		System.out.println("lecturer status");
 		extractTest.setStatus(1);
 
 	}

@@ -4,12 +4,11 @@ public class Proctor implements Runnable {
 	private String proctorName;
 	private int proctorAge;
 	private static int numberOfStudents;
-	//private CourseInformation Fatma;
 
-	public Proctor(String proctorName,int proctorAge,CourseInformation Fatma) {
+	public Proctor(String proctorName,int proctorAge,int numberOfStudents) {
 		this.proctorAge=proctorAge;
 		this.proctorName=proctorName;
-		Proctor.numberOfStudents=Fatma.getStudents().size();
+		Proctor.numberOfStudents=numberOfStudents;
 		Thread t = new Thread(this); 
 		t.start();   
 
@@ -51,6 +50,7 @@ public class Proctor implements Runnable {
 			extractStudent = CourseInformation.Fatma.getStudentQueue().extract();
 			Test currentTest = extractStudent.getTest();
 			ProctorRandomWorkTime();
+			System.out.println("proctor status");
 			currentTest.setStatus(1);
 			currentTest.setClassNumber(extractStudent.getStudentClass());
 			addToTeachingAssitantsQueue(currentTest);
