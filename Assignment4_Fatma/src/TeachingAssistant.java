@@ -43,41 +43,34 @@ public class TeachingAssistant implements Runnable{
 		Queue<Test> BufferBAssistant = CourseInformation.Fatma.getTestQueues().elementAt(1);
 
 		if(this.teachingAssistantName.equals("Maya")){
-			try {
-				while(flag==true) {
-					Test extractTest=BufferAAssistant.extract();
-					System.out.println("im in assitstant 1");
-					if(extractTest.getStudentId()!=-1)//we got the fake exam
-						checkTest(extractTest,0,BufferAAssistant,BufferBAssistant);//indicator 0 for maya
-					else 
-						flag=false;
+			while(flag==true) {
+				Test extractTest=BufferAAssistant.extract();
+				System.out.println("im in assitstant 1");
+				if(extractTest.getStudentId()!=-1)//we got the fake exam
+					checkTest(extractTest,0,BufferAAssistant,BufferBAssistant);//indicator 0 for maya
+				else 
+					flag=false;
 
-				}//while
-			} 
-			catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			}//while
 
 		}
 		else {//lior
-			try {
-				while(flag==true) {
-					Test extractTest=BufferBAssistant.extract();
-					System.out.println("im in assitstant 2");
-					if(extractTest.getStudentId()!=-1)//we got the fake exam
-						checkTest(extractTest,1,BufferAAssistant,BufferBAssistant);//indicator 1 for Lior
-					else 
-						flag=false;
-				}
-
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			while(flag==true) {
+				Test extractTest=BufferBAssistant.extract();
+				System.out.println("im in assitstant 2");
+				if(extractTest.getStudentId()!=-1)//we got the fake exam
+					checkTest(extractTest,1,BufferAAssistant,BufferBAssistant);//indicator 1 for Lior
+				else 
+					flag=false;
 			}
 		}
-
+		updateTotalSalary();
 	}
 
-
+	private void updateTotalSalary() {
+		CourseInformation.Fatma.setSalaryCost(salary);
+		
+	}
 	private void checkTest(Test extractTest, int indicator, Queue<Test> bufferAAssistant, Queue<Test> bufferBAssistant) {
 		double workTime=TeachingAssistantRandomWorkTime();
 		updateAssitantSalary(workTime);

@@ -29,6 +29,7 @@ public class Student implements Runnable{
 		System.out.println("im in"+this.studentName);
 		CourseInformation.Fatma.getInformationSystem().FindMyExam(this); // until someone scan the exam
 		this.test.setStatus(1);
+		System.out.println("im out"+this.studentId);
 	}
 
 	private void SolveTest() {//solve the test

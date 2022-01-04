@@ -13,9 +13,14 @@ public class Queue<T> {
 		this.notifyAll();
 	}
 
-	public synchronized T extract() throws InterruptedException {
+	public synchronized T extract()  {
 		while (buffer.isEmpty()){
-			this.wait();
+			try {
+				this.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		T t = buffer.elementAt(0);
 		buffer.remove(t);

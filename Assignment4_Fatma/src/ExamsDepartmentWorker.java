@@ -15,11 +15,19 @@ public class ExamsDepartmentWorker implements Runnable {
 
 
 	public void run() {
+		checkTests();
+		genrateAnnuncment();
+		System.out.println("im deadzzzzz"+ EDWName);
+	}
+
+
+	private static synchronized void checkTests() {
+		
 		while(!checkIfAllStudentHandled()) {
 			DoEDWWork();
 			updateRemainStudent();	
 		}
-		genrateAnnuncment();
+		
 	}
 
 
@@ -31,6 +39,7 @@ public class ExamsDepartmentWorker implements Runnable {
 
 	private static synchronized void updateRemainStudent() {
 		numberOfStudents--;
+		System.out.println("EDW numberof students: "+numberOfStudents);
 
 	}
 
@@ -46,18 +55,12 @@ public class ExamsDepartmentWorker implements Runnable {
 
 	private synchronized static void DoEDWWork() {
 		Test extractTest;
-			try {
-				//System.out.println("sup");
-				extractTest = CourseInformation.Fatma.getTestQueues().elementAt(5).extract();
-				//System.out.println("im in exam");
-				Test currentTest = extractTest;
-				EDWRandomWorkTime();
-				currentTest.setStatus(1);
-				CourseInformation.Fatma.getInformationSystem().insertTest(currentTest);
-				printStatement(currentTest);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			extractTest = CourseInformation.Fatma.getTestQueues().elementAt(5).extract();
+			Test currentTest = extractTest;
+			EDWRandomWorkTime();
+			currentTest.setStatus(1);
+			CourseInformation.Fatma.getInformationSystem().insertTest(currentTest);
+			printStatement(currentTest);
 		}
 
 
@@ -70,21 +73,21 @@ public class ExamsDepartmentWorker implements Runnable {
 	}
 
 
-	private static void addToTeachingAssitantsQueue(Test currentTest) {
-		Queue<Test> teachingAssit1Queue = CourseInformation.Fatma.getTestQueues().elementAt(0);
-		Queue<Test> teachingAssit2Queue = CourseInformation.Fatma.getTestQueues().elementAt(1);
-		if(teachingAssit1Queue.getBuffer().size()>teachingAssit2Queue.getBuffer().size()) {
-			teachingAssit2Queue.insert(currentTest);
-			System.out.println("im in 1 -"+currentTest.getStudentId());
-		}else {
-			teachingAssit1Queue.insert(currentTest);
-			System.out.println("im in 2 -"+currentTest.getStudentId());
-		}
+//	private static void addToTeachingAssitantsQueue(Test currentTest) {
+//		Queue<Test> teachingAssit1Queue = CourseInformation.Fatma.getTestQueues().elementAt(0);
+//		Queue<Test> teachingAssit2Queue = CourseInformation.Fatma.getTestQueues().elementAt(1);
+//		if(teachingAssit1Queue.getBuffer().size()>teachingAssit2Queue.getBuffer().size()) {
+//			teachingAssit2Queue.insert(currentTest);
+//			System.out.println("im in 1 -"+currentTest.getStudentId());
+//		}else {
+//			teachingAssit1Queue.insert(currentTest);
+//			System.out.println("im in 2 -"+currentTest.getStudentId());
+////		}
+//
+//	}
 
-	}
 
-
-	private static void EDWRandomWorkTime() {				
+	private synchronized static void EDWRandomWorkTime() {				
 		try {
 			Thread.sleep((long) (4000));
 		} catch (InterruptedException e) {

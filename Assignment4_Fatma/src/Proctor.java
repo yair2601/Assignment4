@@ -41,16 +41,12 @@ public class Proctor implements Runnable {
 
 	private synchronized static void DoProctorWork() {
 		Student extractStudent;
-			try {
-				extractStudent = CourseInformation.Fatma.getStudentQueue().extract();
-				Test currentTest = extractStudent.getTest();
-				ProctorRandomWorkTime();
-				currentTest.setStatus(1);
-				currentTest.setClassNumber(extractStudent.getStudentClass());
-				addToTeachingAssitantsQueue(currentTest);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			extractStudent = CourseInformation.Fatma.getStudentQueue().extract();
+			Test currentTest = extractStudent.getTest();
+			ProctorRandomWorkTime();
+			currentTest.setStatus(1);
+			currentTest.setClassNumber(extractStudent.getStudentClass());
+			addToTeachingAssitantsQueue(currentTest);
 		}
 
 

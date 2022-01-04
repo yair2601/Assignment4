@@ -22,28 +22,23 @@ public class Lecturer implements Runnable {
 	}
 
 	private void checkTest() {
-		try {
-			while(flag==true) {
-				LecturerTimeOfWork();
-				Test extractTest=CourseInformation.Fatma.getTestQueues().elementAt(2).extract();
-				System.out.println("im in lecturer");
-				if(extractTest.getStudentId()!=-1){//we got the fake exam
-					giveFactor(extractTest);
-					getExecllentStudent(extractTest);
-					changeStatus(extractTest);
-					passTestToNextQueue(extractTest);
-				}
+		while(flag==true) {
+			LecturerTimeOfWork();
+			Test extractTest=CourseInformation.Fatma.getTestQueues().elementAt(2).extract();
+			System.out.println("im in lecturer");
+			if(extractTest.getStudentId()!=-1){//we got the fake exam
+				giveFactor(extractTest);
+				getExecllentStudent(extractTest);
+				changeStatus(extractTest);
+				passTestToNextQueue(extractTest);
+			}
 
-				else {
-					announceEndOfTest(extractTest);					
-				}
+			else {
+				announceEndOfTest(extractTest);					
+			}
 
 
-			}//while
-		} 
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		}//while
 
 	}
 

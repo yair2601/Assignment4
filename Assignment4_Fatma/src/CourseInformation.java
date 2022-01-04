@@ -18,6 +18,7 @@ public class CourseInformation {
 	public static CourseInformation Fatma;
 	private double Perror;
 	private int NumberOfEDW;
+	private double SalaryCost;
 
 	public CourseInformation(double Perror,int NumberOfEDW) throws IOException {
 		this.Fatma=this;
@@ -151,6 +152,7 @@ public class CourseInformation {
 
 			Thread t = new Thread(students.elementAt(i)); 
 			t.start();   
+		
 		}
 
 	}
@@ -174,5 +176,14 @@ public class CourseInformation {
 	}
 	public Queue<Test> getTestBoundedQueue() {
 		return testBoundedQueue;
+	}
+
+	public double getSalaryCost() {
+		return SalaryCost;
+	}
+
+	public void setSalaryCost(double salaryCost) {
+		if (salaryCost>0)
+		SalaryCost += salaryCost;
 	}
 }

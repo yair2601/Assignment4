@@ -83,6 +83,8 @@ public class GUI extends JFrame {
 		lblNewLabel_3.setBounds(52, 203, 180, 13);
 		contentPane.add(lblNewLabel_3);
 		
+		
+		
 		JButton ButtonExist = new JButton("Exit");
 		ButtonExist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,7 +98,9 @@ public class GUI extends JFrame {
 		ButtonStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem())  );
+					
+				new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem())  );
+				lblNewLabel_3.setText("total cost: "+ CourseInformation.Fatma.getSalaryCost());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
