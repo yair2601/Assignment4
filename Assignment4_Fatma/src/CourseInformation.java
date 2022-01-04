@@ -19,6 +19,9 @@ public class CourseInformation {
 	private double Perror;
 	private int NumberOfEDW;
 	private double SalaryCost;
+	private double testAverageBeforeFactor;
+	private double testAverageAfterFactor;
+
 
 	public CourseInformation(double Perror,int NumberOfEDW) throws IOException {
 		this.Fatma=this;
@@ -185,5 +188,35 @@ public class CourseInformation {
 	public void setSalaryCost(double salaryCost) {
 		if (salaryCost>0)
 		SalaryCost += salaryCost;
+	}
+	public double calculateAverageBeforeFactor() {
+		double totalgrades = 0;
+	for(int i =0;i<this.students.size(); i++) {
+		totalgrades+=this.students.elementAt(i).getTest().getStudentGradeBeforeFactor();
+	}
+	this.testAverageBeforeFactor=totalgrades/this.students.size();
+	return this.testAverageBeforeFactor;
+	
+	}
+	public double calculateAverageAfterFactor() {
+		double totalgrades = 0;
+	for(int i =0;i<this.students.size(); i++) {
+		totalgrades+=this.students.elementAt(i).getTest().getStudentGradeAfterFactor();
+	}
+	this.testAverageAfterFactor=totalgrades/this.students.size();
+	return this.testAverageAfterFactor;
+	
+	}
+
+	public double getTestAverageBeforeFactor() {
+		return testAverageBeforeFactor;
+	}
+
+	public double getTestAverageAfterFactor() {
+		return testAverageAfterFactor;
+	}
+
+	public ExerciseChecker getExerciseCheckers() {
+		return exerciseCheckers;
 	}
 }

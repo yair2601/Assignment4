@@ -140,6 +140,9 @@ public class TeachingAssistant implements Runnable{
 		this.salary+=(workTime*this.pricePerSecond);
 
 	}
+	public double getSalary() {
+		return this.salary;
+	}
 
 
 	private double TeachingAssistantRandomWorkTime() {		

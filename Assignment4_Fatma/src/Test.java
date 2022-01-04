@@ -78,7 +78,7 @@ public class Test {
 	}
 
 	public void setStudentGradeAfterFactor(double studentGradeAfterFactor) {
-		if(studentGradeAfterFactor>this.studentGradeBeforeFactor) {
+		if(studentGradeAfterFactor>=this.studentGradeBeforeFactor) {
 			this.studentGradeAfterFactor = studentGradeAfterFactor;
 		}
 		if(this.studentGradeAfterFactor>100) {

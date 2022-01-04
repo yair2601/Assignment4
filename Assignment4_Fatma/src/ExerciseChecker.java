@@ -83,7 +83,9 @@ public class ExerciseChecker implements Runnable {
 
 	}
 
-
+	public double getSalary() {
+		return this.salary;
+	}
 
 	private void calculateGradeAfterFactor(Test extractTest) {
 		double finalGrade;

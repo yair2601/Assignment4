@@ -16,10 +16,40 @@ public class Lecturer implements Runnable {
 
 	public void run() {
 		checkTest();
-		System.out.println("Test is over! Grades are published, and here are the results:");
+		PrintResults();
+		
 		
 
 	}
+
+	private void PrintResults() {
+		System.out.println("Test is over! Grades are published, and here are the results:");
+		System.out.println("The number of examinees is: "+ CourseInformation.Fatma.getStudents().size());
+		System.out.println("The average grade before factor is: "+ CourseInformation.Fatma.calculateAverageBeforeFactor());
+		System.out.println("The average grade after factor is: "+ CourseInformation.Fatma.calculateAverageAfterFactor());
+		PrintExcelentIDs();
+		System.out.println("The total salary is: "+calculateTotalSalary());
+		
+	}
+
+
+	private double calculateTotalSalary() {
+		int totalSalary=0;
+		for (int i=0;i<CourseInformation.Fatma.getTeachingAssistants().size();i++) {//calculate teaching assistant salary
+			totalSalary+=CourseInformation.Fatma.getTeachingAssistants().elementAt(i).getSalary();
+		}
+		totalSalary+=CourseInformation.Fatma.getExerciseCheckers().getSalary(); //add exercise checker salary
+		return totalSalary;
+	}
+
+
+	private void PrintExcelentIDs() {
+		System.out.println("The Excelent sdutents are: ");
+		for(int i=0;i<this.excellentStudent.size();i++) {
+			System.out.println(this.excellentStudent.elementAt(i));
+		}
+	}
+
 
 	private void checkTest() {
 		while(flag==true) {
