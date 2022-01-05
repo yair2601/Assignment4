@@ -30,14 +30,18 @@ public class CourseInformation  {
 		informationSystem= new InformationSystem();
 		addToTestQueues();
 		createTeachingAssistant();
-		getStudentFromFile("C:\\Users\\yair2\\Java\\Student.txt");
+		getStudentFromFile("C:\\Users\\nirta\\Java\\Student2.txt");
 		createProctors();
+//		createExerciseChecker();
+//		createLecturer();//need to break;
 		createLecturerAndExerciseChecker();//need to break;
+		
 		createSecretaries();
 		createEdW();
 		//informationSystem= new InformationSystem();
 		StartTest(CourseInformation.Fatma.students);
 		waitForEndOfTheTest();
+		
 //		Thread t = new Thread(this);
 //		t.start();
 		
@@ -45,6 +49,12 @@ public class CourseInformation  {
 		
 		
 	}
+
+//	private void createExerciseChecker() {
+//		this.exerciseCheckers= new ExerciseChecker("Marmor",students);//changed
+//		Thread t1 = new Thread(this.exerciseCheckers); 
+//		this.threadVector.add(t1);
+//	}
 
 	private void waitForEndOfTheTest() {
 		for(int i=0;i<this.threadVector.size();i++) {
@@ -93,6 +103,12 @@ public class CourseInformation  {
 		
 	}
 
+//	private void createLecturer() {
+//		this.lecturer = new Lecturer("Roei");
+//		Thread t1 = new Thread(this.lecturer); 
+//		this.threadVector.add(t1);
+//		
+//	}
 	private void createLecturerAndExerciseChecker() {
 		this.lecturer = new Lecturer("Roei");
 		this.exerciseCheckers= new ExerciseChecker("Marmor",students);//changed

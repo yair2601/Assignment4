@@ -60,11 +60,11 @@ public class ExerciseChecker implements Runnable {
 
 	private void calculateFinalGrade() {
 		while(flag==true) {
-			Double randomTime=ExerciseCheckerTimeOfWork();
-			updateExerciseCheckerSalary(randomTime);
 			Test extractTest=CourseInformation.Fatma.getTestQueues().elementAt(3).extract();
 			System.out.println("im in excerisze");
 			if(extractTest.getStudentId()!=-1){//we got the fake exam
+				Double randomTime=ExerciseCheckerTimeOfWork();
+				updateExerciseCheckerSalary(randomTime);
 				calculateGradeAfterFactor(extractTest);
 				changeStatus(extractTest);
 				passTestToNextQueue(extractTest);

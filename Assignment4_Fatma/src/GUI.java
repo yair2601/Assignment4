@@ -97,9 +97,10 @@ public class GUI extends JFrame {
 		JButton ButtonStart = new JButton("Start");
 		ButtonStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblNewLabel_3.setText("total cost: ");
+				lblNewLabel_3.setText("ex."+"total cost: ");
+//				lblNewLabel_3.setText("total cost: ");
 				try {
-					
+					lblNewLabel_3.setText("total cost: ");
 				new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem())  );
 				lblNewLabel_3.setText("total cost: "+ CourseInformation.Fatma.getSalaryCost());
 				} catch (IOException e1) {
@@ -111,4 +112,5 @@ public class GUI extends JFrame {
 		ButtonStart.setBounds(52, 243, 85, 20);
 		contentPane.add(ButtonStart);
 	}
+	
 }

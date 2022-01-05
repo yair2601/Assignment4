@@ -33,7 +33,7 @@ public class Lecturer implements Runnable {
 
 
 	private double calculateTotalSalary() {
-		int totalSalary=0;
+		double totalSalary=0;
 		for (int i=0;i<CourseInformation.Fatma.getTeachingAssistants().size();i++) {//calculate teaching assistant salary
 			totalSalary+=CourseInformation.Fatma.getTeachingAssistants().elementAt(i).getSalary();
 		}
