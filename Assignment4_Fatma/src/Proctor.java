@@ -9,8 +9,7 @@ public class Proctor implements Runnable {
 		this.proctorAge=proctorAge;
 		this.proctorName=proctorName;
 		Proctor.numberOfStudents=numberOfStudents;
-		Thread t = new Thread(this); 
-		t.start();   
+
 
 	}
 

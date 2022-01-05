@@ -12,8 +12,7 @@ public class TeachingAssistant implements Runnable{
 		this.pricePerSecond=PricePerSecond;
 		this.PError=Perror;//need to update later with the Gui
 		this.flag=true;
-		Thread t = new Thread(this); 
-		t.start();  
+ 
 
 	}
 

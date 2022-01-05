@@ -2,7 +2,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CourseInformation {
+public class CourseInformation  {
 	private Vector<Student> students;
 	private Vector<TeachingAssistant> teachingAssistants;
 	private Vector<Proctor> proctors;
@@ -20,24 +20,53 @@ public class CourseInformation {
 	private double SalaryCost;
 	private double testAverageBeforeFactor;
 	private double testAverageAfterFactor;
+	private Vector<Thread> threadVector;
 
 
 	public CourseInformation(double Perror,int NumberOfEDW) throws IOException {
-		this.Fatma=this;
-		this.NumberOfEDW=NumberOfEDW;
-		this.testQueues= new Vector <Queue<Test>>();
+		CourseInformation.Fatma=this;
+		initiateVectors();		
+		this.NumberOfEDW=NumberOfEDW;		
 		informationSystem= new InformationSystem();
 		addToTestQueues();
 		createTeachingAssistant();
-		createStudentsVector();
-		getStudentFromFile("C:\\Users\\nirta\\Java\\Student2.txt");
+		getStudentFromFile("C:\\Users\\yair2\\Java\\Student.txt");
 		createProctors();
-		createLecturer();
+		createLecturerAndExerciseChecker();//need to break;
 		createSecretaries();
 		createEdW();
 		//informationSystem= new InformationSystem();
-		StartTest(this.Fatma.students);
+		StartTest(CourseInformation.Fatma.students);
+		waitForEndOfTheTest();
+//		Thread t = new Thread(this);
+//		t.start();
 		
+		
+		
+		
+	}
+
+	private void waitForEndOfTheTest() {
+		for(int i=0;i<this.threadVector.size();i++) {
+			try {
+				this.threadVector.elementAt(i).join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	private void initiateVectors() {
+		this.threadVector=new Vector<Thread>();
+		this.testQueues= new Vector <Queue<Test>>();
+		this.IEMSecretary= new Vector<IEMSecretary>() ;
+		proctors=new Vector<Proctor>();
+		this.students = new Vector<Student>();
+		this.studentQueue= new Queue<Student>();
+		examsDepartmentWorkers=new Vector<ExamsDepartmentWorker>();
+		this.teachingAssistants= new Vector<TeachingAssistant>();
 		
 	}
 
@@ -45,18 +74,31 @@ public class CourseInformation {
 		IEMSecretary Hana= new IEMSecretary("Hana",0);
 		IEMSecretary Yona= new IEMSecretary("Yona",1);
 		insertToSecretaryVector(Hana,Yona);
+		Thread t1 = new Thread(Hana); 
+		Thread t2 = new Thread(Yona);
+		addToTreadVectorAndRun2(t1,t2);
+	}
+
+	private void addToTreadVectorAndRun2(Thread t1, Thread t2) {
+		this.threadVector.add(t1);
+		this.threadVector.add(t2);
+		t1.start();
+		t2.start();
+		
 	}
 
 	private void insertToSecretaryVector(IEMSecretary Hana, IEMSecretary Yona) {
-		Vector<IEMSecretary> IEMSecretary= new Vector<IEMSecretary>() ;
 		IEMSecretary.add(Hana);
 		IEMSecretary.add(Yona);
 		
 	}
 
-	private void createLecturer() {
-		this.lecturer = new Lecturer("Roy");
+	private void createLecturerAndExerciseChecker() {
+		this.lecturer = new Lecturer("Roei");
 		this.exerciseCheckers= new ExerciseChecker("Marmor",students);//changed
+		Thread t1 = new Thread(this.lecturer); 
+		Thread t2 = new Thread(this.exerciseCheckers);
+		addToTreadVectorAndRun2(t1, t2);
 		
 	}
 
@@ -65,29 +107,40 @@ public class CourseInformation {
 		Proctor Brijet= new Proctor("Brijet", 75, this.getStudents().size());
 		Proctor Jaklin= new Proctor("Jaklin", 80, this.getStudents().size());
 		insertToProctorVector(Jorjet,Brijet,Jaklin);
+		Thread t1 = new Thread(Jorjet); 
+		Thread t2 = new Thread(Brijet);
+		Thread t3 = new Thread(Jaklin);
+		addToTreadVectorAndRun3(t1, t2, t3);
+		
+		
+	}
+	private void addToTreadVectorAndRun3(Thread t1, Thread t2,Thread t3) {
+		this.threadVector.add(t1);
+		this.threadVector.add(t2);
+		this.threadVector.add(t3);
+		t1.start();
+		t2.start();
+		t3.start();
 		
 	}
 
 	private void insertToProctorVector(Proctor Jorjet, Proctor Brijet, Proctor Jaklin) {
-		proctors=new Vector<Proctor>();
 		proctors.add(Jorjet);
 		proctors.add(Brijet);
 		proctors.add(Jaklin);
 		
 	}
 
-	private void createStudentsVector() {
-		this.students = new Vector<Student>();
-		this.studentQueue= new Queue<Student>();
-		
-	}
 
 	private void createTeachingAssistant() {
 		TeachingAssistant Lior = new TeachingAssistant("Lior", 3,Perror);
 		TeachingAssistant Maya = new TeachingAssistant("Maya", 3,Perror);
-		this.teachingAssistants= new Vector<TeachingAssistant>();
 		this.teachingAssistants.add(Maya);
 		this.teachingAssistants.add(Lior);
+		Thread t1 = new Thread(Lior); 		
+		Thread t2 = new Thread(Maya); 
+		addToTreadVectorAndRun2(t1, t2);
+		
 		
 	}
 
@@ -103,10 +156,13 @@ public class CourseInformation {
 	}
 
 	private void createEdW() {
-		examsDepartmentWorkers=new Vector<ExamsDepartmentWorker>();
 		for(int i=0;i<this.NumberOfEDW;i++) {
 			ExamsDepartmentWorker shmulik = new ExamsDepartmentWorker("shmulik", this);
 			examsDepartmentWorkers.add(shmulik);
+			Thread t = new Thread(this.examsDepartmentWorkers.elementAt(0));
+			this.threadVector.add(t);
+			t.start();
+			
 		}
 	}
 
@@ -186,10 +242,11 @@ public class CourseInformation {
 		System.out.println("dffd");
 
 	}
-	private static void StartTest(Vector<Student> students) {
+	private  void StartTest(Vector<Student> students) {
 		for(int i=0; i<students.size();i++) {
 
 			Thread t = new Thread(students.elementAt(i)); 
+			this.threadVector.add(t);
 			t.start();   
 		
 		}
@@ -255,4 +312,10 @@ public class CourseInformation {
 	public ExerciseChecker getExerciseCheckers() {
 		return exerciseCheckers;
 	}
+
+//	public void run() {
+//		waitForEndOfTheTest();
+//		System.out.println("ended");
+//		
+//	}
 }

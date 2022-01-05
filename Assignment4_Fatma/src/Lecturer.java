@@ -9,8 +9,7 @@ public class Lecturer implements Runnable {
 		this.excellentStudent=new Vector<Integer>();
 		this.lecturerName= lecturerName;
 		this.flag=true;
-		Thread t = new Thread(this); 
-		t.start();   
+		
 	}
 
 

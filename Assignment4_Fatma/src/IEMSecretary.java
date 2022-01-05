@@ -12,8 +12,7 @@ public class IEMSecretary implements Runnable {
 		flag=true;
 		//this.flag2=true;
 		this.secretaryType=secretaryType;
-		Thread t = new Thread(this); 
-		t.start();
+		
 		
 	}
 

@@ -8,8 +8,7 @@ public class ExamsDepartmentWorker implements Runnable {
 	public ExamsDepartmentWorker(String EDWName,CourseInformation Fatma) {
 		this.EDWName=EDWName;
 		ExamsDepartmentWorker.numberOfStudents=Fatma.getStudents().size();
-		Thread t = new Thread(this); 
-		t.start();   
+ 
 
 	}
 

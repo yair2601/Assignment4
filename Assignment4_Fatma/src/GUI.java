@@ -97,6 +97,7 @@ public class GUI extends JFrame {
 		JButton ButtonStart = new JButton("Start");
 		ButtonStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblNewLabel_3.setText("total cost: ");
 				try {
 					
 				new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem())  );

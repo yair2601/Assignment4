@@ -14,9 +14,6 @@ public class ExerciseChecker implements Runnable {
 		this.flag=true;
 		this.workGrades= new long[students.size()][6];
 		FillworkGrades(students);
-		Thread t = new Thread(this); 
-		t.start();  
-		System.out.println("vv");
 
 
 	}
