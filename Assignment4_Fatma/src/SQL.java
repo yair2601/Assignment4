@@ -19,13 +19,13 @@ public class SQL {
 	}
 
 	// -------------- CREATE TABLES METHOD -----------------
-	public void createTables(String firstTable) {
+	public void createTables(String firstTable,String createFirstTable) {
 		try{
 			// if table already exists, drop it
 			// if table already exists, SQL can't override it
 			stmt.executeUpdate("DROP TABLE IF EXISTS " + firstTable);
 			// create new empty table with given name
-			String createFirstTable = "CREATE TABLE " + firstTable +"(Snum int, size int)";
+			//String createFirstTable = "CREATE TABLE " + firstTable +"(ID int, Date Datetime, Correct Answers int, Final Grade float, )";
 			stmt.executeUpdate(createFirstTable);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -33,9 +33,9 @@ public class SQL {
 	}
 
 	// -------------- INSERT INTO TABLE METHOD -----------------
-	public void insertIntoTable(String tableName, Test o) throws SQLException{
-		//String insertDetails = "INSERT INTO " + tableName + "(Snum, size) VALUES('" + o.getSerialNum() + "','" + o.getSize() + "')";
-		//stmt.executeUpdate(insertDetails);
+	public void insertIntoTable(String tableName, String insertDetails) throws SQLException{
+		//String insertDetails = "INSERT INTO " + tableName + "(ID, Date, CorrectAnswers, FinalGrade, IsOutstanding) VALUES('" + o.getSerialNum() + "','" + o.getSize() + "')";
+		stmt.executeUpdate(insertDetails);
 	}
 	
 	// -------------- EXTRACT FROM TABLE METHOD -----------------

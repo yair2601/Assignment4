@@ -110,6 +110,7 @@ public class TeachingAssistant implements Runnable{
 	private void checkQuestion(int i, Test extractTest) {
 		if(extractTest.getStudentAnswer()[i]==correctAnswer[i]) {
 			extractTest.UpdateStudentGradeBeforeFactor(5);
+			extractTest.setCorrectAnswers(1);
 		}
 		else {
 			double randomNumber=generateRandomNumber();
@@ -117,6 +118,7 @@ public class TeachingAssistant implements Runnable{
 				extractTest.UpdateStudentGradeBeforeFactor(5);
 			else if(randomNumber<(this.PError/2)&&extractTest.getStatus()==2){
 				extractTest.UpdateStudentGradeBeforeFactor(5);
+				extractTest.setCorrectAnswers(1);
 			}
 
 		}

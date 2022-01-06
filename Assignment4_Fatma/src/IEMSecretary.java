@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 
 public class IEMSecretary implements Runnable {
 
@@ -69,10 +70,10 @@ public class IEMSecretary implements Runnable {
 
 	private static synchronized void workOnTest(Test extractTest, int secretaryType) {
 		if(secretaryType==0) {
-			UpdateDB(secretaryType);	
+			UpdateDB(secretaryType,extractTest);	
 		}
 		if(secretaryType==1) {
-			UpdateDB(secretaryType);
+			UpdateDB(secretaryType,extractTest);
 		}
 		PrintStudentInformation(extractTest);
 		changeStatus(extractTest);
@@ -87,12 +88,27 @@ public class IEMSecretary implements Runnable {
 		
 	}
 
-	private static synchronized void UpdateDB(int secretaryType) {
+	private static synchronized void UpdateDB(int secretaryType, Test extractTest) {
+		String id = Integer.toString(extractTest.getStudentId());
 		if(secretaryType==0) {
-				
+//			boolean b =false;
+//			String insertDetails = "INSERT INTO " + "Fatma_Below70" + "(ID, Date, CorrectAnswers, FinalGrade) VALUES('" + id + "','" + extractTest.getDate() + "','" + extractTest.getNumberOfCorrectAnswers()+ "','" +extractTest.getStudentFinalGrade() + "')";	
+//			try {
+//				CourseInformation.Fatma.getSqlVector().elementAt(1).insertIntoTable("Fatma_Below70", insertDetails);
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 		if(secretaryType==1) {
-			
+//			boolean b =true;
+//			String insertDetails = "INSERT INTO " + "Fatma_Above70" + "(ID, Date, CorrectAnswers, FinalGrade, IsOutstanding) VALUES('" + id + "','" + extractTest.getDate() + "','" + extractTest.getNumberOfCorrectAnswers()+ "','" +extractTest.getStudentFinalGrade()+ "','" + false + "')";
+//			try {
+//				CourseInformation.Fatma.getSqlVector().elementAt(0).insertIntoTable("Fatma_Above70", insertDetails);
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 		
 	}

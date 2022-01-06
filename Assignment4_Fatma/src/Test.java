@@ -10,6 +10,7 @@ public class Test {
 	private double studentFinalGrade;
 	private int Status;//0-default 1-Signature by proctor 2-check once 3-check Twice 4-confirmed+factor 5- after works 6-in DB 7-scanned 8 read by student
 	private int classNumber;
+	private int CorrectAnswers;
 	
 	public Test(int studentId) {
 		this.setStudentId(studentId);
@@ -91,6 +92,15 @@ public class Test {
 
 	public void setStudentFinalGrade(double studentFinalGrade) {
 		this.studentFinalGrade = studentFinalGrade;
+	}
+
+	public int getNumberOfCorrectAnswers() {
+		// TODO Auto-generated method stub
+		return this.CorrectAnswers;
+	}
+
+	public void setCorrectAnswers(int correctAnswers) {
+		CorrectAnswers += correctAnswers;
 	}
 
 }
