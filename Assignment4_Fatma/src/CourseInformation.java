@@ -26,6 +26,7 @@ public class CourseInformation  {
 
 	public CourseInformation(double Perror,int NumberOfEDW) throws IOException {
 		CourseInformation.Fatma=this;
+//		GUI.frame.getlblNewLabel_3().setText("check");
 		initiateVectors();		
 		this.NumberOfEDW=NumberOfEDW;		
 		informationSystem= new InformationSystem();

@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingWorker;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -18,6 +19,10 @@ import java.awt.event.ActionEvent;
 public class GUI extends JFrame {
 
 	private JPanel contentPane;
+	private static JLabel lblNewLabel_3 = new JLabel("total cost: ");
+	public static GUI frame;
+	private static JComboBox comboBox = new JComboBox();
+	private static JSpinner spinner = new JSpinner();
 
 	/**
 	 * Launch the application.
@@ -26,18 +31,56 @@ public class GUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI frame = new GUI();
+					GUI.frame = new GUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				System.out.println("hjkhk");
+				
+//				while(true) {
+//					try {
+//						this.wait();
+//					} catch (InterruptedException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//					waitforbuttonPreessed();
+//					lblNewLabel_3.setText("ex."+"total cost: ");
+//					try {
+//						new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem())  );
+//					} catch (NumberFormatException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//					lblNewLabel_3.setText("total cost: "+ CourseInformation.Fatma.getSalaryCost());
+//					
+//				}
 			}
+
+
+
+
 		});
+		
+		
+		
+
 	}
+	
+	
 
 	/**
 	 * Create the frame.
+	 * @return 
 	 */
+	public JLabel getlblNewLabel_3() {
+		return this.lblNewLabel_3;
+	}
+	
 	public GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 484, 310);
@@ -50,7 +93,7 @@ public class GUI extends JFrame {
 		lblNewLabel.setBounds(52, 53, 103, 27);
 		contentPane.add(lblNewLabel);
 		
-		JSpinner spinner = new JSpinner();
+		
 		spinner.setModel(new SpinnerNumberModel(0.2, 0.1, 0.9, 0.01));
 		spinner.setBounds(203, 57, 74, 20);
 		contentPane.add(spinner);
@@ -62,7 +105,7 @@ public class GUI extends JFrame {
 		lblNewLabel_1.setBounds(52, 109, 103, 27);
 		contentPane.add(lblNewLabel_1);
 		
-		JComboBox comboBox = new JComboBox();
+		
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
 		comboBox.setSelectedIndex(1);
 		comboBox.setBounds(203, 112, 74, 21);
@@ -79,7 +122,7 @@ public class GUI extends JFrame {
 		lblNewLabel_2.setBounds(52, 146, 139, 13);
 		contentPane.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("total cost: ");
+		
 		lblNewLabel_3.setBounds(52, 203, 180, 13);
 		contentPane.add(lblNewLabel_3);
 		
@@ -97,20 +140,30 @@ public class GUI extends JFrame {
 		JButton ButtonStart = new JButton("Start");
 		ButtonStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblNewLabel_3.setText("ex."+"total cost: ");
-//				lblNewLabel_3.setText("total cost: ");
-				try {
-					lblNewLabel_3.setText("total cost: ");
-				new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem())  );
-				lblNewLabel_3.setText("total cost: "+ CourseInformation.Fatma.getSalaryCost());
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				SwingWorker<Void, String> worker= new SwingWorker <Void, String>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						lblNewLabel_3.setText("ex."+"total cost: ");
+						try {
+							new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem())  );
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						lblNewLabel_3.setText("total cost: "+ CourseInformation.Fatma.getSalaryCost());
+						return null;
+					}
+					
+				};
+				worker.execute();
 			}
 		});
 		ButtonStart.setBounds(52, 243, 85, 20);
 		contentPane.add(ButtonStart);
+		
+
+		
 	}
 	
 }
