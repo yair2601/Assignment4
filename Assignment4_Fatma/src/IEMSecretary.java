@@ -91,24 +91,26 @@ public class IEMSecretary implements Runnable {
 	private static synchronized void UpdateDB(int secretaryType, Test extractTest) {
 		String id = Integer.toString(extractTest.getStudentId());
 		if(secretaryType==0) {
-//			boolean b =false;
-//			String insertDetails = "INSERT INTO " + "Fatma_Below70" + "(ID, Date, CorrectAnswers, FinalGrade) VALUES('" + id + "','" + extractTest.getDate() + "','" + extractTest.getNumberOfCorrectAnswers()+ "','" +extractTest.getStudentFinalGrade() + "')";	
-//			try {
-//				CourseInformation.Fatma.getSqlVector().elementAt(1).insertIntoTable("Fatma_Below70", insertDetails);
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+			boolean b =false;
+			String insertDetails = "INSERT INTO " + "Fatma_Below70" + "(ID, Date, CorrectAnswers, FinalGrade, IsOutstanding) VALUES('" + id + "','" + extractTest.getDate() + "'," + extractTest.getNumberOfCorrectAnswers()+ "," +extractTest.getStudentFinalGrade()+ ", 0" + ")";	
+			
+			try {
+				CourseInformation.Fatma.getSqlVector().elementAt(1).insertIntoTable("Fatma_Below70", insertDetails);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		if(secretaryType==1) {
 //			boolean b =true;
-//			String insertDetails = "INSERT INTO " + "Fatma_Above70" + "(ID, Date, CorrectAnswers, FinalGrade, IsOutstanding) VALUES('" + id + "','" + extractTest.getDate() + "','" + extractTest.getNumberOfCorrectAnswers()+ "','" +extractTest.getStudentFinalGrade()+ "','" + false + "')";
-//			try {
-//				CourseInformation.Fatma.getSqlVector().elementAt(0).insertIntoTable("Fatma_Above70", insertDetails);
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+//			//String insertDetails = "INSERT INTO " + "Fatma_Above70" + "(ID, CorrectAnswers, FinalGrade, IsOutstanding) VALUES('52424245', 15, 62, 1)";
+			String insertDetails = "INSERT INTO " + "Fatma_Above70" + "(ID, Date, CorrectAnswers, FinalGrade, IsOutstanding) VALUES('" + id + "','" + extractTest.getDate() + "'," + extractTest.getNumberOfCorrectAnswers()+ "," +extractTest.getStudentFinalGrade()+ ", 1" + ")";
+			try {
+				CourseInformation.Fatma.getSqlVector().elementAt(0).insertIntoTable("Fatma_Above70", insertDetails);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}

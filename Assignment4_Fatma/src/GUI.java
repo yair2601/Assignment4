@@ -36,38 +36,10 @@ public class GUI extends JFrame {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				System.out.println("hjkhk");
 				
-//				while(true) {
-//					try {
-//						this.wait();
-//					} catch (InterruptedException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//					waitforbuttonPreessed();
-//					lblNewLabel_3.setText("ex."+"total cost: ");
-//					try {
-//						new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem())  );
-//					} catch (NumberFormatException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//					lblNewLabel_3.setText("total cost: "+ CourseInformation.Fatma.getSalaryCost());
-//					
-//				}
 			}
 
-
-
-
 		});
-		
-		
-		
 
 	}
 	
@@ -144,7 +116,7 @@ public class GUI extends JFrame {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						lblNewLabel_3.setText("ex."+"total cost: ");
+						lblNewLabel_3.setText("total cost: ");
 						try {
 							new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem())  );
 						} catch (NumberFormatException e) {

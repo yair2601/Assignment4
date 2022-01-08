@@ -32,7 +32,7 @@ public class CourseInformation  {
 		informationSystem= new InformationSystem();
 		addToTestQueues();
 		createTeachingAssistant();
-		getStudentFromFile("C:\\Users\\yair2\\Java\\Student2.txt");
+		getStudentFromFile("C:\\Users\\yair2\\Java\\Student.txt");
 		createProctors();
 		createExerciseChecker();
 		createLecturer();//need to break;
@@ -51,7 +51,7 @@ public class CourseInformation  {
 		
 		String createFirstTable = "CREATE TABLE " + "Fatma_Above70" +"(ID varchar(9), Date Datetime, CorrectAnswers int, FinalGrade float, IsOutstanding bit)";
 		sql1.createTables("Fatma_Above70", createFirstTable);
-		String createSecondTable = "CREATE TABLE " + "Fatma_Below70" +"(ID varchar(9), Date Datetime, CorrectAnswers int, FinalGrade float)";
+		String createSecondTable = "CREATE TABLE " + "Fatma_Below70" +"(ID varchar(9), Date Datetime, CorrectAnswers int, FinalGrade float, IsOutstanding bit)";
 		sql1.createTables("Fatma_Below70", createSecondTable);
 		
 		waitForEndOfTheTest();
