@@ -91,8 +91,8 @@ public class IEMSecretary implements Runnable {
 	private static synchronized void UpdateDB(int secretaryType, Test extractTest) {
 		String id = Integer.toString(extractTest.getStudentId());
 		if(secretaryType==0) {
-			boolean b =false;
-			String insertDetails = "INSERT INTO " + "Fatma_Below70" + "(ID, Date, CorrectAnswers, FinalGrade, IsOutstanding) VALUES('" + id + "','" + extractTest.getDate() + "'," + extractTest.getNumberOfCorrectAnswers()+ "," +extractTest.getStudentFinalGrade()+ ", 0" + ")";	
+			
+			String insertDetails = "INSERT INTO " + "Fatma_Below70" + "(ID, Date, CorrectAnswers, FinalGrade) VALUES('" + id + "','" + extractTest.getDate() + "'," + extractTest.getNumberOfCorrectAnswers()+ "," +extractTest.getStudentFinalGrade()+")";	
 			
 			try {
 				CourseInformation.Fatma.getSqlVector().elementAt(1).insertIntoTable("Fatma_Below70", insertDetails);
@@ -102,9 +102,8 @@ public class IEMSecretary implements Runnable {
 			}
 		}
 		if(secretaryType==1) {
-//			boolean b =true;
-//			//String insertDetails = "INSERT INTO " + "Fatma_Above70" + "(ID, CorrectAnswers, FinalGrade, IsOutstanding) VALUES('52424245', 15, 62, 1)";
-			String insertDetails = "INSERT INTO " + "Fatma_Above70" + "(ID, Date, CorrectAnswers, FinalGrade, IsOutstanding) VALUES('" + id + "','" + extractTest.getDate() + "'," + extractTest.getNumberOfCorrectAnswers()+ "," +extractTest.getStudentFinalGrade()+ ", 1" + ")";
+			int IsOutstanding= IsOutstanding(extractTest);
+			String insertDetails = "INSERT INTO " + "Fatma_Above70" + "(ID, Date, CorrectAnswers, FinalGrade, IsOutstanding) VALUES('" + id + "','" + extractTest.getDate() + "'," + extractTest.getNumberOfCorrectAnswers()+ "," +extractTest.getStudentFinalGrade()+ ", "+IsOutstanding + ")";
 			try {
 				CourseInformation.Fatma.getSqlVector().elementAt(0).insertIntoTable("Fatma_Above70", insertDetails);
 			} catch (SQLException e) {
@@ -115,6 +114,13 @@ public class IEMSecretary implements Runnable {
 		
 	}
 
+
+	private static int IsOutstanding(Test extractTest) {
+		if(extractTest.getStudentFinalGrade()>95) {
+			return 1;
+		}
+		return 0;
+	}
 
 	private static synchronized void returnTestToCurrentQueue(Test extractTest) {
 		CourseInformation.Fatma.getTestQueues().elementAt(4).insert(extractTest);

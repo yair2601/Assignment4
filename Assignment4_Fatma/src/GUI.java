@@ -23,6 +23,7 @@ public class GUI extends JFrame {
 	public static GUI frame;
 	private static JComboBox comboBox = new JComboBox();
 	private static JSpinner spinner = new JSpinner();
+	public static String url ="C:\\Users\\yair\\Java\\Student.txt";
 
 	/**
 	 * Launch the application.
@@ -118,7 +119,7 @@ public class GUI extends JFrame {
 					protected Void doInBackground() throws Exception {
 						lblNewLabel_3.setText("total cost: ");
 						try {
-							new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem())  );
+							new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem()),url);
 						} catch (NumberFormatException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

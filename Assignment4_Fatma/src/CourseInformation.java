@@ -24,44 +24,35 @@ public class CourseInformation  {
 	private Vector<SQL> SqlVector;
 
 
-	public CourseInformation(double Perror,int NumberOfEDW) throws IOException {
+	public CourseInformation(double Perror,int NumberOfEDW, String url) throws IOException {
 		CourseInformation.Fatma=this;
-//		GUI.frame.getlblNewLabel_3().setText("check");
 		initiateVectors();		
 		this.NumberOfEDW=NumberOfEDW;		
 		informationSystem= new InformationSystem();
 		addToTestQueues();
 		createTeachingAssistant();
-		getStudentFromFile("C:\\Users\\yair2\\Java\\Student.txt");
+		getStudentFromFile(url);
 		createProctors();
 		createExerciseChecker();
-		createLecturer();//need to break;
-		//createLecturerAndExerciseChecker();//need to break;
-		
+		createLecturer();	
 		createSecretaries();
 		createEdW();
-		//informationSystem= new InformationSystem();
+		buildSQLDB();
 		StartTest(CourseInformation.Fatma.students);
-		
-		//--------sql-------
+		waitForEndOfTheTest();	
+	}
+
+	private void buildSQLDB() {
 		SQL sql1 = new SQL();
 		SQL sql2 = new SQL();
 		this.SqlVector.add(sql1);
 		this.SqlVector.add(sql2);
-		
+
 		String createFirstTable = "CREATE TABLE " + "Fatma_Above70" +"(ID varchar(9), Date Datetime, CorrectAnswers int, FinalGrade float, IsOutstanding bit)";
 		sql1.createTables("Fatma_Above70", createFirstTable);
-		String createSecondTable = "CREATE TABLE " + "Fatma_Below70" +"(ID varchar(9), Date Datetime, CorrectAnswers int, FinalGrade float, IsOutstanding bit)";
+		String createSecondTable = "CREATE TABLE " + "Fatma_Below70" +"(ID varchar(9), Date Datetime, CorrectAnswers int, FinalGrade float)";
 		sql1.createTables("Fatma_Below70", createSecondTable);
-		
-		waitForEndOfTheTest();
-		
-//		Thread t = new Thread(this);
-//		t.start();
-		
-		
-		
-		
+
 	}
 
 	private void createExerciseChecker() {
@@ -80,7 +71,7 @@ public class CourseInformation  {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	private void initiateVectors() {
@@ -93,7 +84,7 @@ public class CourseInformation  {
 		examsDepartmentWorkers=new Vector<ExamsDepartmentWorker>();
 		this.teachingAssistants= new Vector<TeachingAssistant>();
 		this.SqlVector= new  Vector<SQL>();
-		
+
 	}
 
 	private void createSecretaries() {
@@ -110,13 +101,13 @@ public class CourseInformation  {
 		this.threadVector.add(t2);
 		t1.start();
 		t2.start();
-		
+
 	}
 
 	private void insertToSecretaryVector(IEMSecretary Hana, IEMSecretary Yona) {
 		IEMSecretary.add(Hana);
 		IEMSecretary.add(Yona);
-		
+
 	}
 
 	private void createLecturer() {
@@ -125,15 +116,7 @@ public class CourseInformation  {
 		this.threadVector.add(t1);
 		t1.start();	
 	}
-//	
-//	private void createLecturerAndExerciseChecker() {
-//		this.lecturer = new Lecturer("Roei");
-//		this.exerciseCheckers= new ExerciseChecker("Marmor",students);//changed
-//		Thread t1 = new Thread(this.lecturer); 
-//		Thread t2 = new Thread(this.exerciseCheckers);
-//		addToTreadVectorAndRun2(t1, t2);
-//		
-//	}
+
 
 	private void createProctors() {
 		Proctor Jorjet= new Proctor("Jorjet", 70, this.getStudents().size());
@@ -144,8 +127,8 @@ public class CourseInformation  {
 		Thread t2 = new Thread(Brijet);
 		Thread t3 = new Thread(Jaklin);
 		addToTreadVectorAndRun3(t1, t2, t3);
-		
-		
+
+
 	}
 	private void addToTreadVectorAndRun3(Thread t1, Thread t2,Thread t3) {
 		this.threadVector.add(t1);
@@ -154,14 +137,14 @@ public class CourseInformation  {
 		t1.start();
 		t2.start();
 		t3.start();
-		
+
 	}
 
 	private void insertToProctorVector(Proctor Jorjet, Proctor Brijet, Proctor Jaklin) {
 		proctors.add(Jorjet);
 		proctors.add(Brijet);
 		proctors.add(Jaklin);
-		
+
 	}
 
 
@@ -173,8 +156,8 @@ public class CourseInformation  {
 		Thread t1 = new Thread(Lior); 		
 		Thread t2 = new Thread(Maya); 
 		addToTreadVectorAndRun2(t1, t2);
-		
-		
+
+
 	}
 
 	private void addToTestQueues() {
@@ -185,7 +168,7 @@ public class CourseInformation  {
 		this.testQueues.add(new Queue<Test>());//IEMSecretary line place 4
 		//this.testQueues.add(new Queue<Test>());
 		this.testQueues.add(new BoundedQueue<Test>(10));//EDW line place 5
-		
+
 	}
 
 	private void createEdW() {
@@ -195,7 +178,7 @@ public class CourseInformation  {
 			Thread t = new Thread(this.examsDepartmentWorkers.elementAt(0));
 			this.threadVector.add(t);
 			t.start();
-			
+
 		}
 	}
 
@@ -214,20 +197,16 @@ public class CourseInformation  {
 					continue;
 				}
 				double[] workGrades = createGradesArray(StudentInformation);
-				Student student = new Student(convertStrToInt(StudentInformation[0]), StudentInformation[1], convertStrToInt(StudentInformation[2]), convertStrToDouble(StudentInformation[4]), convertStrToDouble(StudentInformation[3]), workGrades, this);
-				//					
+				Student student = new Student(convertStrToInt(StudentInformation[0]), StudentInformation[1], convertStrToInt(StudentInformation[2]), convertStrToDouble(StudentInformation[4]), convertStrToDouble(StudentInformation[3]), workGrades, this);					
 				this.students.add(student);
-				//				}else {
-				//					EnglishQuestion question = new EnglishQuestion(questionPart[1],Integer.valueOf(questionPart[2]), questionPart[3].charAt(0),cohiceArray,questionPart[9]);
-				//					this.questions.add(question);
-				//				}
+
 
 			}
 		}
 
 		catch (FileNotFoundException exception)
 		{
-			System.out.println ("The file " + Configuration + " was not found.");
+			System.out.println ("The file " + Configuration + " was not found. please change the url in the gui class(line 26)");
 		}
 		catch (IOException exception)
 		{
@@ -269,28 +248,20 @@ public class CourseInformation  {
 		return GradesArray;
 	}
 
-	public static void main(String[] args) throws IOException{
-		CourseInformation fatma = new CourseInformation(0.2, 2);
-	//	StartTest(fatma.students);
-		System.out.println("dffd");
-
-	}
 	private  void StartTest(Vector<Student> students) {
 		for(int i=0; i<students.size();i++) {
 
 			Thread t = new Thread(students.elementAt(i)); 
 			this.threadVector.add(t);
 			t.start();   
-		
+
 		}
 
 	}
 	public Vector<TeachingAssistant> getTeachingAssistants() {
 		return teachingAssistants;
 	}
-	//	public Vector<Queue<?>> getQueus() {
-	//		return this.queus;
-	//	}
+
 	public Queue<Student> getStudentQueue() {
 		return studentQueue;
 	}
@@ -303,7 +274,7 @@ public class CourseInformation  {
 	public Vector<SQL> getSqlVector() {
 		return this.SqlVector;
 	}
-	
+
 	public InformationSystem getInformationSystem() {
 		return informationSystem;
 	}
@@ -317,25 +288,25 @@ public class CourseInformation  {
 
 	public void setSalaryCost(double salaryCost) {
 		if (salaryCost>0)
-		SalaryCost += salaryCost;
+			SalaryCost += salaryCost;
 	}
 	public double calculateAverageBeforeFactor() {
 		double totalgrades = 0;
-	for(int i =0;i<this.students.size(); i++) {
-		totalgrades+=this.students.elementAt(i).getTest().getStudentGradeBeforeFactor();
-	}
-	this.testAverageBeforeFactor=totalgrades/this.students.size();
-	return this.testAverageBeforeFactor;
-	
+		for(int i =0;i<this.students.size(); i++) {
+			totalgrades+=this.students.elementAt(i).getTest().getStudentGradeBeforeFactor();
+		}
+		this.testAverageBeforeFactor=totalgrades/this.students.size();
+		return this.testAverageBeforeFactor;
+
 	}
 	public double calculateAverageAfterFactor() {
 		double totalgrades = 0;
-	for(int i =0;i<this.students.size(); i++) {
-		totalgrades+=this.students.elementAt(i).getTest().getStudentGradeAfterFactor();
-	}
-	this.testAverageAfterFactor=totalgrades/this.students.size();
-	return this.testAverageAfterFactor;
-	
+		for(int i =0;i<this.students.size(); i++) {
+			totalgrades+=this.students.elementAt(i).getTest().getStudentGradeAfterFactor();
+		}
+		this.testAverageAfterFactor=totalgrades/this.students.size();
+		return this.testAverageAfterFactor;
+
 	}
 
 	public double getTestAverageBeforeFactor() {
@@ -350,9 +321,4 @@ public class CourseInformation  {
 		return exerciseCheckers;
 	}
 
-//	public void run() {
-//		waitForEndOfTheTest();
-//		System.out.println("ended");
-//		
-//	}
 }

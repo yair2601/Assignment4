@@ -95,7 +95,7 @@ public class Lecturer implements Runnable {
 	}
 
 	private void getExecllentStudent(Test extractTest) {
-		if(extractTest.getStudentGradeAfterFactor()>=95) {
+		if(extractTest.getStudentGradeAfterFactor()>95) {
 			this.excellentStudent.add( extractTest.getStudentId());
 		}
 
