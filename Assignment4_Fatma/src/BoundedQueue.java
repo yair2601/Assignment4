@@ -3,12 +3,12 @@ import java.util.Vector;
 public class BoundedQueue<T> extends Queue<T>{
 	private int maxSize;
 
-	public BoundedQueue(int maxSize){
+	public BoundedQueue(int maxSize){//constructor
 		super();
 		this.maxSize=maxSize;
 	}
 
-	public synchronized void insert(T item) {
+	public synchronized void insert(T item) {//insert the item to the queue
 		while(buffer.size()>=maxSize) {
 			try {
 				this.wait();
@@ -21,7 +21,7 @@ public class BoundedQueue<T> extends Queue<T>{
 		buffer.add(item);
 		this.notifyAll(); }
 
-	public synchronized T extract(){
+	public synchronized T extract(){//extract the item from the queue
 		while (buffer.isEmpty())
 			try {
 				this .wait();

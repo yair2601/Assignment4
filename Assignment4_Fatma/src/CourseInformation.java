@@ -24,7 +24,7 @@ public class CourseInformation  {
 	private Vector<SQL> SqlVector;
 
 
-	public CourseInformation(double Perror,int NumberOfEDW, String url) throws IOException {
+	public CourseInformation(double Perror,int NumberOfEDW, String url) throws IOException {//constructor
 		CourseInformation.Fatma=this;
 		initiateVectors();		
 		this.NumberOfEDW=NumberOfEDW;		
@@ -42,7 +42,7 @@ public class CourseInformation  {
 		waitForEndOfTheTest();	
 	}
 
-	private void buildSQLDB() {
+	private void buildSQLDB() {//build the Sql tables
 		SQL sql1 = new SQL();
 		SQL sql2 = new SQL();
 		this.SqlVector.add(sql1);
@@ -55,14 +55,14 @@ public class CourseInformation  {
 
 	}
 
-	private void createExerciseChecker() {
-		this.exerciseCheckers= new ExerciseChecker("Marmor",students);//changed
+	private void createExerciseChecker() {//create the exercise checker
+		this.exerciseCheckers= new ExerciseChecker("Marmor",students);
 		Thread t1 = new Thread(this.exerciseCheckers); 
 		this.threadVector.add(t1);
 		t1.start();
 	}
 
-	private void waitForEndOfTheTest() {
+	private void waitForEndOfTheTest() {//wait for the end of the test process
 		for(int i=0;i<this.threadVector.size();i++) {
 			try {
 				this.threadVector.elementAt(i).join();
@@ -74,7 +74,7 @@ public class CourseInformation  {
 
 	}
 
-	private void initiateVectors() {
+	private void initiateVectors() {//initiate all the course information vectors
 		this.threadVector=new Vector<Thread>();
 		this.testQueues= new Vector <Queue<Test>>();
 		this.IEMSecretary= new Vector<IEMSecretary>() ;
@@ -87,7 +87,7 @@ public class CourseInformation  {
 
 	}
 
-	private void createSecretaries() {
+	private void createSecretaries() {//create the secretaries
 		IEMSecretary Hana= new IEMSecretary("Hana",0);
 		IEMSecretary Yona= new IEMSecretary("Yona",1);
 		insertToSecretaryVector(Hana,Yona);
@@ -96,7 +96,7 @@ public class CourseInformation  {
 		addToTreadVectorAndRun2(t1,t2);
 	}
 
-	private void addToTreadVectorAndRun2(Thread t1, Thread t2) {
+	private void addToTreadVectorAndRun2(Thread t1, Thread t2) {//add 2 threads to vector and run it
 		this.threadVector.add(t1);
 		this.threadVector.add(t2);
 		t1.start();
@@ -104,13 +104,13 @@ public class CourseInformation  {
 
 	}
 
-	private void insertToSecretaryVector(IEMSecretary Hana, IEMSecretary Yona) {
+	private void insertToSecretaryVector(IEMSecretary Hana, IEMSecretary Yona) {//insert the two secretary to their vector
 		IEMSecretary.add(Hana);
 		IEMSecretary.add(Yona);
 
 	}
 
-	private void createLecturer() {
+	private void createLecturer() {//create the lecturer
 		this.lecturer = new Lecturer("Roei");
 		Thread t1 = new Thread(this.lecturer); 
 		this.threadVector.add(t1);
@@ -118,7 +118,7 @@ public class CourseInformation  {
 	}
 
 
-	private void createProctors() {
+	private void createProctors() {// create the proctors
 		Proctor Jorjet= new Proctor("Jorjet", 70, this.getStudents().size());
 		Proctor Brijet= new Proctor("Brijet", 75, this.getStudents().size());
 		Proctor Jaklin= new Proctor("Jaklin", 80, this.getStudents().size());
@@ -130,7 +130,7 @@ public class CourseInformation  {
 
 
 	}
-	private void addToTreadVectorAndRun3(Thread t1, Thread t2,Thread t3) {
+	private void addToTreadVectorAndRun3(Thread t1, Thread t2,Thread t3) {// add three threads to the thread vector and run them
 		this.threadVector.add(t1);
 		this.threadVector.add(t2);
 		this.threadVector.add(t3);
@@ -140,7 +140,7 @@ public class CourseInformation  {
 
 	}
 
-	private void insertToProctorVector(Proctor Jorjet, Proctor Brijet, Proctor Jaklin) {
+	private void insertToProctorVector(Proctor Jorjet, Proctor Brijet, Proctor Jaklin) {// insert proctors to the proctors vector
 		proctors.add(Jorjet);
 		proctors.add(Brijet);
 		proctors.add(Jaklin);
@@ -148,7 +148,7 @@ public class CourseInformation  {
 	}
 
 
-	private void createTeachingAssistant() {
+	private void createTeachingAssistant() {// create the teaching assistant
 		TeachingAssistant Lior = new TeachingAssistant("Lior", 3,Perror);
 		TeachingAssistant Maya = new TeachingAssistant("Maya", 3,Perror);
 		this.teachingAssistants.add(Maya);
@@ -160,7 +160,7 @@ public class CourseInformation  {
 
 	}
 
-	private void addToTestQueues() {
+	private void addToTestQueues() {//add the test queues to the queue vector
 		this.testQueues.add(new Queue<Test>());//teaching assist 1 line place 0
 		this.testQueues.add(new Queue<Test>());//teaching assist 2 line place 1
 		this.testQueues.add(new Queue<Test>());//Lecturer line place 2
@@ -171,7 +171,7 @@ public class CourseInformation  {
 
 	}
 
-	private void createEdW() {
+	private void createEdW() {// create the EDW
 		for(int i=0;i<this.NumberOfEDW;i++) {
 			ExamsDepartmentWorker shmulik = new ExamsDepartmentWorker("shmulik", this);
 			examsDepartmentWorkers.add(shmulik);
@@ -182,7 +182,7 @@ public class CourseInformation  {
 		}
 	}
 
-	private void getStudentFromFile(String import_questions) throws IOException {
+	private void getStudentFromFile(String import_questions) throws IOException {// File reception get the student from the file 
 		String Configuration = import_questions;
 		BufferedReader inFile=null;
 		try
@@ -219,7 +219,7 @@ public class CourseInformation  {
 
 	}
 
-	private double convertStrToDouble(String str) {
+	private double convertStrToDouble(String str) {//convert string to double
 		try{
 			double number = Double.parseDouble(str);
 			return number;
@@ -229,7 +229,7 @@ public class CourseInformation  {
 		}
 		return 0;
 	}
-	private int convertStrToInt(String str) {
+	private int convertStrToInt(String str) {//convert string to int
 
 		try{
 			int number = Integer.parseInt(str);
@@ -240,7 +240,7 @@ public class CourseInformation  {
 		}
 		return 0;
 	}
-	private double[] createGradesArray(String[] StudentInformation) {//create array of choises from the choises in the file
+	private double[] createGradesArray(String[] StudentInformation) {//create array of choices from the choices in the file
 		double[] GradesArray = new double[4];
 		for(int i=0;i<GradesArray.length;i++ ) {
 			GradesArray[i]=convertStrToDouble(StudentInformation[5+i]);
@@ -248,7 +248,7 @@ public class CourseInformation  {
 		return GradesArray;
 	}
 
-	private  void StartTest(Vector<Student> students) {
+	private  void StartTest(Vector<Student> students) {//students start to resolve the test
 		for(int i=0; i<students.size();i++) {
 
 			Thread t = new Thread(students.elementAt(i)); 
@@ -258,39 +258,39 @@ public class CourseInformation  {
 		}
 
 	}
-	public Vector<TeachingAssistant> getTeachingAssistants() {
+	public Vector<TeachingAssistant> getTeachingAssistants() {//get the teaching Assistants vector
 		return teachingAssistants;
 	}
 
-	public Queue<Student> getStudentQueue() {
+	public Queue<Student> getStudentQueue() {//get the student Queue vector
 		return studentQueue;
 	}
-	public Vector <Student> getStudents() {
+	public Vector <Student> getStudents() {//get the students vector
 		return this.students;
 	}
-	public Vector<Queue<Test>> getTestQueues() {
+	public Vector<Queue<Test>> getTestQueues() {//get the test Queues vector
 		return this.testQueues;
 	}
-	public Vector<SQL> getSqlVector() {
+	public Vector<SQL> getSqlVector() {//get the Sql Vector
 		return this.SqlVector;
 	}
 
-	public InformationSystem getInformationSystem() {
+	public InformationSystem getInformationSystem() {//get the information System
 		return informationSystem;
 	}
-	public Queue<Test> getTestBoundedQueue() {
+	public Queue<Test> getTestBoundedQueue() {//get the test Bounded Queue
 		return testBoundedQueue;
 	}
 
-	public double getSalaryCost() {
+	public double getSalaryCost() {//get the Salary Cost
 		return SalaryCost;
 	}
 
-	public void setSalaryCost(double salaryCost) {
+	public void setSalaryCost(double salaryCost) {// set the total salary cost
 		if (salaryCost>0)
 			SalaryCost += salaryCost;
 	}
-	public double calculateAverageBeforeFactor() {
+	public double calculateAverageBeforeFactor() {// calculate the tests average before the factor
 		double totalgrades = 0;
 		for(int i =0;i<this.students.size(); i++) {
 			totalgrades+=this.students.elementAt(i).getTest().getStudentGradeBeforeFactor();
@@ -299,7 +299,7 @@ public class CourseInformation  {
 		return this.testAverageBeforeFactor;
 
 	}
-	public double calculateAverageAfterFactor() {
+	public double calculateAverageAfterFactor() {// calculate the tests average after the factor
 		double totalgrades = 0;
 		for(int i =0;i<this.students.size(); i++) {
 			totalgrades+=this.students.elementAt(i).getTest().getStudentGradeAfterFactor();
@@ -309,15 +309,15 @@ public class CourseInformation  {
 
 	}
 
-	public double getTestAverageBeforeFactor() {
+	public double getTestAverageBeforeFactor() {//get the tests average before the factor
 		return testAverageBeforeFactor;
 	}
 
-	public double getTestAverageAfterFactor() {
+	public double getTestAverageAfterFactor() {//get the tests average after the factor
 		return testAverageAfterFactor;
 	}
 
-	public ExerciseChecker getExerciseCheckers() {
+	public ExerciseChecker getExerciseCheckers() {//get the exercise Checkers
 		return exerciseCheckers;
 	}
 

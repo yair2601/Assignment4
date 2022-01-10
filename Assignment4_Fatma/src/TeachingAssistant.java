@@ -7,10 +7,10 @@ public class TeachingAssistant implements Runnable{
 	private double PError;
 	private boolean flag;//change while we are getting a fake exam
 
-	public TeachingAssistant(String teachingAssistantName,int PricePerSecond,double Perror) {
+	public TeachingAssistant(String teachingAssistantName,int PricePerSecond,double Perror) {//constructor
 		this.teachingAssistantName=teachingAssistantName;
 		this.pricePerSecond=PricePerSecond;
-		this.PError=Perror;//need to update later with the Gui
+		this.PError=Perror;
 		this.flag=true;
  
 
@@ -32,12 +32,12 @@ public class TeachingAssistant implements Runnable{
 	}
 
 
-	public static boolean [] getCorrectAnswer() {
+	public static boolean [] getCorrectAnswer() {//get the correct test answers
 		return correctAnswer;
 	}
 
 
-	public void run() {
+	public void run() {// thread run
 		Queue<Test> BufferAAssistant = CourseInformation.Fatma.getTestQueues().elementAt(0);
 		Queue<Test> BufferBAssistant = CourseInformation.Fatma.getTestQueues().elementAt(1);
 
@@ -67,11 +67,11 @@ public class TeachingAssistant implements Runnable{
 		System.out.println("teachingAssist dead");
 	}
 
-	private void updateTotalSalary() {
+	private void updateTotalSalary() {//update the total salary in the course information
 		CourseInformation.Fatma.setSalaryCost(salary);
 		
 	}
-	private void checkTest(Test extractTest, int indicator, Queue<Test> bufferAAssistant, Queue<Test> bufferBAssistant) {
+	private void checkTest(Test extractTest, int indicator, Queue<Test> bufferAAssistant, Queue<Test> bufferBAssistant) {// check the test
 		double workTime=TeachingAssistantRandomWorkTime();
 		updateAssitantSalary(workTime);
 		if(extractTest.getStatus()==1){//test not checked yet
@@ -82,7 +82,7 @@ public class TeachingAssistant implements Runnable{
 			moveTestToSecondAssitent(extractTest,indicator,bufferAAssistant,bufferBAssistant);
 		}
 
-		else if(extractTest.getStatus()==2){//test already checked one time++ need to check what we do with the grade which one we are taking currently we just updating twice
+		else if(extractTest.getStatus()==2){//test already checked one time
 			for (int i=0;i<extractTest.getStudentAnswer().length;i++) {
 				checkQuestion (i,extractTest);
 			}
@@ -90,14 +90,14 @@ public class TeachingAssistant implements Runnable{
 			moveTestToLecturer(extractTest);
 		}
 	}
-	private void moveTestToLecturer(Test extractTest) {
+	private void moveTestToLecturer(Test extractTest) {//put this exam in the lecturer queue
 		Queue<Test> BufferToLecturer = CourseInformation.Fatma.getTestQueues().elementAt(2);
 		BufferToLecturer.insert(extractTest);
 
 	}
 
 
-	private void moveTestToSecondAssitent(Test extractTest, int indicator, Queue<Test> bufferAAssistant, Queue<Test> bufferBAssistant) {
+	private void moveTestToSecondAssitent(Test extractTest, int indicator, Queue<Test> bufferAAssistant, Queue<Test> bufferBAssistant) {//put this exam in the second assistant queue
 		if(indicator==0) {
 			bufferBAssistant.insert(extractTest);
 		}
@@ -107,7 +107,7 @@ public class TeachingAssistant implements Runnable{
 	}
 
 
-	private void checkQuestion(int i, Test extractTest) {
+	private void checkQuestion(int i, Test extractTest) {//check if the question is correct and give a score on the question
 		if(extractTest.getStudentAnswer()[i]==correctAnswer[i]) {
 			extractTest.UpdateStudentGradeBeforeFactor(5);
 			extractTest.setCorrectAnswers(1);
@@ -126,29 +126,29 @@ public class TeachingAssistant implements Runnable{
 	}
 
 
-	private void updateTestStatus(Test extractTest) {
+	private void updateTestStatus(Test extractTest) {//update the test status according to his location in the process
 		System.out.println("teaching assis status");
 		extractTest.setStatus(1);
 
 	}
 
 
-	private double generateRandomNumber() {
+	private double generateRandomNumber() {//generate a random number
 		double random = Math.random();
 		return random;
 	}
 
 
-	private void updateAssitantSalary(double workTime) {
+	private void updateAssitantSalary(double workTime) {// update the assistant salary according to her work time 
 		this.salary+=(workTime*this.pricePerSecond);
 
 	}
-	public double getSalary() {
+	public double getSalary() {// get the salary
 		return this.salary;
 	}
 
 
-	private double TeachingAssistantRandomWorkTime() {		
+	private double TeachingAssistantRandomWorkTime() {//calculate teaching assistant work time
 		double random = ((Math.random() * (2.5 - 1.5)) + 1.5);//generate random number in the range;
 		try {
 			Thread.sleep((long) (random*1000));

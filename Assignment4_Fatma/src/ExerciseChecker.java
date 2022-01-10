@@ -18,7 +18,7 @@ public class ExerciseChecker implements Runnable {
 
 	}
 
-	private void calculateAssignmentsGrade(long[][] workGrades, Test extractTest) {
+	private void calculateAssignmentsGrade(long[][] workGrades, Test extractTest) {// calculate the total grade of the assignments
 		for(int i=0;i<workGrades.length;i++) {
 			if(workGrades[i][0]==extractTest.getStudentId()) {
 				workGrades[i][5]=(long) (workGrades[i][1]*0.02+workGrades[i][2]*0.04+workGrades[i][3]*0.06+workGrades[i][4]*0.08);
@@ -27,7 +27,7 @@ public class ExerciseChecker implements Runnable {
 		}
 	}
 
-	private void FillworkGrades(Vector<Student> students) {
+	private void FillworkGrades(Vector<Student> students) {//get the works grades
 		for(int i=0;i<students.size();i++) {
 			workGrades[i][0]=(students.elementAt(i).getStudentId());
 		}
@@ -35,7 +35,7 @@ public class ExerciseChecker implements Runnable {
 
 	}
 
-	private void CopyStudentWorksGrades(Vector<Student> students) {
+	private void CopyStudentWorksGrades(Vector<Student> students) {//copy the works grades to the array
 		for(int i=0;i<students.size();i++) {
 			for(int j=1;j<5;j++) {
 				workGrades[i][j]=(long) students.elementAt(i).getWorkGrades()[j-1];
@@ -45,7 +45,7 @@ public class ExerciseChecker implements Runnable {
 
 	}
 
-	public void run() {
+	public void run() {//thread run
 		calculateFinalGrade();
 		updateTotalSalary();
 		System.out.println("Echecker dead");
@@ -53,12 +53,12 @@ public class ExerciseChecker implements Runnable {
 
 
 
-	private void updateTotalSalary() {
+	private void updateTotalSalary() {// update the total salary in the course information
 		CourseInformation.Fatma.setSalaryCost(salary);
 		
 	}
 
-	private void calculateFinalGrade() {
+	private void calculateFinalGrade() {// calculate the student final grade 
 		while(flag==true) {
 			Test extractTest=CourseInformation.Fatma.getTestQueues().elementAt(3).extract();
 			System.out.println("im in excerisze");
@@ -76,16 +76,16 @@ public class ExerciseChecker implements Runnable {
 
 	}
 
-	private void passTestToNextQueue(Test extractTest) {
+	private void passTestToNextQueue(Test extractTest) {// move the test to the IEM queue 
 		CourseInformation.Fatma.getTestQueues().elementAt(4).insert(extractTest);
 
 	}
 
-	public double getSalary() {
+	public double getSalary() {// get the checker salary
 		return this.salary;
 	}
 
-	private void calculateGradeAfterFactor(Test extractTest) {
+	private void calculateGradeAfterFactor(Test extractTest) {// calculate grade after factor
 		double finalGrade;
 		int studentLocation=findStudentLocation(extractTest.getStudentId());
 		calculateAssignmentsGrade(workGrades,extractTest);
@@ -95,30 +95,30 @@ public class ExerciseChecker implements Runnable {
 
 
 
-	private int findStudentLocation(int studentId) {
+	private int findStudentLocation(int studentId) {// find the student in the works grades array
 		for(int i=0;i<this.workGrades.length;i++) {
 			if(workGrades[i][0]==studentId)
 				return i;
 		}
-		return 0;//need to decide what to do if the student id doesnot exist
+		return 0;
 
 	}
 
 
 
-	private void updateExerciseCheckerSalary(Double randomTime) {
+	private void updateExerciseCheckerSalary(Double randomTime) {//update the checker salary
 		this.salary+=randomTime*this.pricePerSecond;
 
 	}
 
-	private void changeStatus(Test extractTest) {
+	private void changeStatus(Test extractTest) {//change the test status according to the process
 		System.out.println("Excersize status");
 		extractTest.setStatus(1);
 
 	}
 
-	private double ExerciseCheckerTimeOfWork() {		
-		double random = ((Math.random() * (3 - 2)) + 2);//generate random number in the range;
+	private double ExerciseCheckerTimeOfWork() {//calculate the checker work time		
+		double random = ((Math.random() * (3 - 2)) + 2);//generate random number in the range
 		try {
 			Thread.sleep((long) (random*1000));
 		} catch (InterruptedException e) {
