@@ -5,37 +5,35 @@ public class Proctor implements Runnable {
 	private int proctorAge;
 	private static int numberOfStudents;
 
-	public Proctor(String proctorName,int proctorAge,int numberOfStudents) {
+	public Proctor(String proctorName,int proctorAge,int numberOfStudents) {//constructor
 		this.proctorAge=proctorAge;
 		this.proctorName=proctorName;
 		Proctor.numberOfStudents=numberOfStudents;
-
-
 	}
 
 
-	public void run() {
+	public void run() {//run method what will proctor do
 		takeTestFromStudents();
-		System.out.println("proctor dead");
+		CourseInformation.Fatma.getStudentQueue().insert(null);
 	}
 
 
-	private static synchronized void takeTestFromStudents() {
+	private  void takeTestFromStudents() {//if there is more student that didnt finish and pass handel them 
 		while(!checkIfAllStudentHandled()) {
 			DoProctorWork();
 			updateRemainStudent();	
 		}
-		
+
 	}
 
 
-	private static synchronized void updateRemainStudent() {
+	private static synchronized void updateRemainStudent() {//update the left student counter
 		numberOfStudents--;
 
 	}
 
 
-	private static synchronized boolean checkIfAllStudentHandled() {		
+	private static synchronized boolean checkIfAllStudentHandled() {//check the number of left student	
 		if(numberOfStudents>0) {
 			return false;
 		}
@@ -44,36 +42,32 @@ public class Proctor implements Runnable {
 	}
 
 
-	private synchronized static void DoProctorWork() {
+	private void DoProctorWork() {//do the work
 		Student extractStudent;
-			extractStudent = CourseInformation.Fatma.getStudentQueue().extract();
+		extractStudent = CourseInformation.Fatma.getStudentQueue().extract();
+		if(extractStudent!=null) {
 			Test currentTest = extractStudent.getTest();
 			ProctorRandomWorkTime();
-			System.out.println("proctor status");
 			currentTest.setStatus(1);
 			currentTest.setClassNumber(extractStudent.getStudentClass());
 			addToTeachingAssitantsQueue(currentTest);
 		}
 
+	}
 
-
-
-
-	private static void addToTeachingAssitantsQueue(Test currentTest) {
+	private  void addToTeachingAssitantsQueue(Test currentTest) {//pass the test for check
 		Queue<Test> teachingAssit1Queue = CourseInformation.Fatma.getTestQueues().elementAt(0);
 		Queue<Test> teachingAssit2Queue = CourseInformation.Fatma.getTestQueues().elementAt(1);
 		if(teachingAssit1Queue.getBuffer().size()>teachingAssit2Queue.getBuffer().size()) {
 			teachingAssit2Queue.insert(currentTest);
-			System.out.println("im in 1 -"+currentTest.getStudentId());
 		}else {
 			teachingAssit1Queue.insert(currentTest);
-			System.out.println("im in 2 -"+currentTest.getStudentId());
 		}
 
 	}
 
 
-	private static void ProctorRandomWorkTime() {		
+	private  void ProctorRandomWorkTime() {//simulate the work time		
 		double random = ((Math.random() * (3 - 1)) + 1);//generate random number in the range;
 		try {
 			Thread.sleep((long) (random*1000));

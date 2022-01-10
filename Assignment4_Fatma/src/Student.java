@@ -9,7 +9,8 @@ public class Student implements Runnable{
 	private Test test;
 	private CourseInformation course;
 	private double[] WorkGrades;
-	
+
+	//constructor:
 	public Student(int studentId,String studentName,int studentClass, double studentLevel, double studentPace, double[] grades, CourseInformation course ) {
 		this.studentClass = studentClass;
 		this.studentId=studentId;
@@ -20,29 +21,25 @@ public class Student implements Runnable{
 		this.WorkGrades=grades;
 	}
 
-	public void run() {
+	public void run() {//run method what will student will do
 		this.test = new Test(studentId);
 		test.setStudentId(this.studentId);
 		test.setDate();
 		SolveTest();
 		course.getStudentQueue().insert(this);
-		System.out.println("im in"+this.studentName);
 		CourseInformation.Fatma.getInformationSystem().FindMyExam(this); // until someone scan the exam
-		System.out.println("student status");
-		this.test.setStatus(1);
-		
-		//System.out.println("im out"+this.studentId);
+		this.test.setStatus(1);		
 	}
 
 	private void SolveTest() {//solve the test
 		for(int i=0;i<test.getStudentAnswer().length;i++) {
 			answerQuestion(i);
-			 try {
-		    		
-					Thread.sleep((long) (this.studentPace*1000));
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+			try {
+
+				Thread.sleep((long) (this.studentPace*1000));
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -61,18 +58,18 @@ public class Student implements Runnable{
 			}
 		}
 	}
-	public Test getTest() {
+	public Test getTest() {//getter for student test
 		return this.test;
 	}
 
-	public int getStudentClass() {
+	public int getStudentClass() {//getter for student class
 		return studentClass;
 	}
-	public int getStudentId() {
+	public int getStudentId() {//getter for student id
 		return studentId;
 	}
 
-	public double[] getWorkGrades() {
+	public double[] getWorkGrades() {//getter for work grades
 		return WorkGrades;
 	}
 }

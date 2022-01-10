@@ -23,12 +23,13 @@ public class GUI extends JFrame {
 	public static GUI frame;
 	private static JComboBox comboBox = new JComboBox();
 	private static JSpinner spinner = new JSpinner();
-	public static String url ="C:\\Users\\yair\\Java\\Student.txt";
+	public static String url ="C:\\Users\\yair2\\Java\\Student3.txt";
+	private static JLabel lblNewLabel_2 = new JLabel("");
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {//main
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -43,18 +44,8 @@ public class GUI extends JFrame {
 		});
 
 	}
-	
-	
 
-	/**
-	 * Create the frame.
-	 * @return 
-	 */
-	public JLabel getlblNewLabel_3() {
-		return this.lblNewLabel_3;
-	}
-	
-	public GUI() {
+	public GUI() {//GUI constructor
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 484, 310);
 		contentPane = new JPanel();
@@ -84,14 +75,8 @@ public class GUI extends JFrame {
 		comboBox.setBounds(203, 112, 74, 21);
 		contentPane.add(comboBox);
 		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(52, 160, 225, 11);
-//		progressBar.setMinimum(0);
-//		progressBar.setMaximum(CourseInformation.Fatma.getStudents().size());
 		
-		contentPane.add(progressBar);
 		
-		JLabel lblNewLabel_2 = new JLabel("test in progress please wait");
 		lblNewLabel_2.setBounds(52, 146, 139, 13);
 		contentPane.add(lblNewLabel_2);
 		
@@ -111,19 +96,23 @@ public class GUI extends JFrame {
 		contentPane.add(ButtonExist);
 		
 		JButton ButtonStart = new JButton("Start");
-		ButtonStart.addActionListener(new ActionListener() {
+		ButtonStart.addActionListener(new ActionListener() {//what will happened if the start button will pressed
 			public void actionPerformed(ActionEvent e) {
+				//in this code block we create swingworker to deal with the label change during the program
+				//the gui thered is ETD wich mean it can do thing if it busy the worker is a soultion for the problem
 				SwingWorker<Void, String> worker= new SwingWorker <Void, String>(){
 
 					@Override
 					protected Void doInBackground() throws Exception {
 						lblNewLabel_3.setText("total cost: ");
+						lblNewLabel_2.setText("Test started please wait...");
 						try {
 							new CourseInformation((Double)spinner.getValue(),Integer.parseInt((String) comboBox.getSelectedItem()),url);
 						} catch (NumberFormatException e) {
-							// TODO Auto-generated catch block
+							
 							e.printStackTrace();
 						}
+						lblNewLabel_2.setText("");
 						lblNewLabel_3.setText("total cost: "+ CourseInformation.Fatma.getSalaryCost());
 						return null;
 					}

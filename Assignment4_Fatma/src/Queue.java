@@ -18,7 +18,6 @@ public class Queue<T> {
 			try {
 				this.wait();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -32,7 +31,7 @@ public class Queue<T> {
 		}
 		return false;
 	}
-	
+
 	public Vector<T> getBuffer() {//get the queue
 		return this.buffer;
 	}

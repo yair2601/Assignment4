@@ -48,9 +48,9 @@ public class CourseInformation  {
 		this.SqlVector.add(sql1);
 		this.SqlVector.add(sql2);
 
-		String createFirstTable = "CREATE TABLE " + "Fatma_Above70" +"(ID varchar(9), Date Datetime, CorrectAnswers int, FinalGrade float, IsOutstanding bit)";
+		String createFirstTable = "CREATE TABLE " + "Fatma_Above70" +"(ID varchar(9), Date varchar(8), CorrectAnswers int, FinalGrade float, IsOutstanding bit)";
 		sql1.createTables("Fatma_Above70", createFirstTable);
-		String createSecondTable = "CREATE TABLE " + "Fatma_Below70" +"(ID varchar(9), Date Datetime, CorrectAnswers int, FinalGrade float)";
+		String createSecondTable = "CREATE TABLE " + "Fatma_Below70" +"(ID varchar(9), Date varchar(8), CorrectAnswers int, FinalGrade float)";
 		sql1.createTables("Fatma_Below70", createSecondTable);
 
 	}
@@ -166,7 +166,6 @@ public class CourseInformation  {
 		this.testQueues.add(new Queue<Test>());//Lecturer line place 2
 		this.testQueues.add(new Queue<Test>());//ExerciseChecker line place 3
 		this.testQueues.add(new Queue<Test>());//IEMSecretary line place 4
-		//this.testQueues.add(new Queue<Test>());
 		this.testQueues.add(new BoundedQueue<Test>(10));//EDW line place 5
 
 	}

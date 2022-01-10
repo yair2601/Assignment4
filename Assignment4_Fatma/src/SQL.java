@@ -34,10 +34,10 @@ public class SQL {
 
 	// -------------- INSERT INTO TABLE METHOD -----------------
 	public void insertIntoTable(String tableName, String insertDetails) throws SQLException{
-		//String insertDetails = "INSERT INTO " + tableName + "(ID, Date, CorrectAnswers, FinalGrade, IsOutstanding) VALUES('" + o.getSerialNum() + "','" + o.getSize() + "')";
+		//the order to mysql come from the signature
 		stmt.executeUpdate(insertDetails);
 	}
-	
+
 	// -------------- EXTRACT FROM TABLE METHOD -----------------
 	public String extractFromTable(String tableName, int rowNum, String colName){
 		ResultSet result = null;

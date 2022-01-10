@@ -48,7 +48,6 @@ public class ExerciseChecker implements Runnable {
 	public void run() {//thread run
 		calculateFinalGrade();
 		updateTotalSalary();
-		System.out.println("Echecker dead");
 	}
 
 
@@ -61,7 +60,6 @@ public class ExerciseChecker implements Runnable {
 	private void calculateFinalGrade() {// calculate the student final grade 
 		while(flag==true) {
 			Test extractTest=CourseInformation.Fatma.getTestQueues().elementAt(3).extract();
-			System.out.println("im in excerisze");
 			if(extractTest.getStudentId()!=-1){//we got the fake exam
 				Double randomTime=ExerciseCheckerTimeOfWork();
 				updateExerciseCheckerSalary(randomTime);
@@ -70,7 +68,8 @@ public class ExerciseChecker implements Runnable {
 				passTestToNextQueue(extractTest);
 			}else {
 				flag=false;
-				passTestToNextQueue(extractTest);//pass the fake exam
+				passTestToNextQueue(extractTest);//pass the fake exam twice
+				passTestToNextQueue(extractTest);
 			}
 		}//while
 
@@ -112,7 +111,6 @@ public class ExerciseChecker implements Runnable {
 	}
 
 	private void changeStatus(Test extractTest) {//change the test status according to the process
-		System.out.println("Excersize status");
 		extractTest.setStatus(1);
 
 	}

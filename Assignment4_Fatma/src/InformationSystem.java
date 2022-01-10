@@ -3,14 +3,14 @@ import java.util.Vector;
 public class InformationSystem {
 	private Vector<Test> Tests; 
 
-	public InformationSystem () {
+	public InformationSystem () {//constructor
 		Tests= new Vector<Test>();
 	}
-	public synchronized void insertTest(Test test) {
+	public synchronized void insertTest(Test test) {//insert into the vector and wake all the student
 		this.Tests.add(test);
 		this.notifyAll();
 	}
-	public synchronized void FindMyExam(Student student) {
+	public synchronized void FindMyExam(Student student) {//search the exam of givien student in the vector
 		while(checkIfExamExist(student)==false) {
 			try {
 				this.wait();
@@ -19,7 +19,7 @@ public class InformationSystem {
 			}
 		}
 	}
-	private synchronized boolean checkIfExamExist(Student student) {
+	private synchronized boolean checkIfExamExist(Student student) {//find the exam in the vector
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -28,7 +28,6 @@ public class InformationSystem {
 		}
 		for(int i=0;i<this.Tests.size();i++) {
 			if(student.getTest().getStudentId()==Tests.elementAt(i).getStudentId()) {
-				System.out.println("this id my exam"+student.getStudentId());
 				return true;
 			}
 		}

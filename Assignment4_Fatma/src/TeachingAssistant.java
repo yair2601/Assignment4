@@ -32,7 +32,7 @@ public class TeachingAssistant implements Runnable{
 	}
 
 
-	public static boolean [] getCorrectAnswer() {//get the correct test answers
+	public static  boolean [] getCorrectAnswer() {//get the correct test answers
 		return correctAnswer;
 	}
 
@@ -44,7 +44,6 @@ public class TeachingAssistant implements Runnable{
 		if(this.teachingAssistantName.equals("Maya")){
 			while(flag==true) {
 				Test extractTest=BufferAAssistant.extract();
-				System.out.println("im in assitstant 1");
 				if(extractTest.getStudentId()!=-1)//we got the fake exam
 					checkTest(extractTest,0,BufferAAssistant,BufferBAssistant);//indicator 0 for maya
 				else 
@@ -56,7 +55,6 @@ public class TeachingAssistant implements Runnable{
 		else {//lior
 			while(flag==true) {
 				Test extractTest=BufferBAssistant.extract();
-				System.out.println("im in assitstant 2");
 				if(extractTest.getStudentId()!=-1)//we got the fake exam
 					checkTest(extractTest,1,BufferAAssistant,BufferBAssistant);//indicator 1 for Lior
 				else 
@@ -64,7 +62,6 @@ public class TeachingAssistant implements Runnable{
 			}
 		}
 		updateTotalSalary();
-		System.out.println("teachingAssist dead");
 	}
 
 	private void updateTotalSalary() {//update the total salary in the course information
@@ -75,9 +72,6 @@ public class TeachingAssistant implements Runnable{
 		double workTime=TeachingAssistantRandomWorkTime();
 		updateAssitantSalary(workTime);
 		if(extractTest.getStatus()==1){//test not checked yet
-//			for (int i=0;i<extractTest.getStudentAnswer().length;i++) {
-//				//checkQuestion (i,extractTest); need to check if needed i think the grade is just for the second check
-//			}
 			updateTestStatus(extractTest);
 			moveTestToSecondAssitent(extractTest,indicator,bufferAAssistant,bufferBAssistant);
 		}
@@ -127,7 +121,6 @@ public class TeachingAssistant implements Runnable{
 
 
 	private void updateTestStatus(Test extractTest) {//update the test status according to his location in the process
-		System.out.println("teaching assis status");
 		extractTest.setStatus(1);
 
 	}
